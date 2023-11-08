@@ -1,0 +1,62 @@
+<div class="card p-4 bg-primary-80" style="z-index: 1;">
+    <div class="card-header bg-primary-80 border-0">
+        <h1 class="fs-1 color-secondary montserrat">{{meeting.name}}</h1>
+        <p class="color-secondary arial fs-6 "> {{meeting.description}}</p>
+        <p class="color-secondary arial fs-6 "> {{meeting.code_meeting}}</p>
+        <p class="color-secondary arial fs-6 fw-bold"> {{meeting.date_meeting}}</p>
+        <p class="color-secondary arial fs-6 fw-bold"> {{meeting.start_hour.slice(0,5)}} -
+            {{meeting.end_hour.slice(0,5)}}
+        </p>
+        <a [routerLink]="''" class="color-primary-900 arial fs-6 fw-bold text-decoration-none"> Ver ubicación
+            seleccionada</a>
+
+    </div>
+</div>
+
+<div class="card p-4 mt-4" style="z-index: 1;">
+    <div class="card-body">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-8 col-sm-12">
+                    <div class="d-block d-md-flex align-items-center">
+                        <a [routerLink]="''" class="color-primary-900 arial fs-6 fw-bold text-decoration-none me-2">
+                            Usuarios registrados</a>
+                        <br>
+                        <a [routerLink]="''" class="color-secondary arial fs-6 fw-bold text-decoration-none">
+                            Lista de asistencia</a>
+                    </div>
+                    <!-- <form class="filters mt-3 d-md-flex">
+                        <input type="text" class="form form-filter w-100" placeholder="Busqueda por nombre">
+                        <button type="submit" class="button-search"> Buscar </button>
+                    </form> -->
+                    <div class="table-responsive mt-3">
+                        <table class="table table-responsive table-hover table-bordered"
+                            *ngIf="registers.length else noDataRegister">
+                            <thead>
+                                <tr class="">
+                                    <th scope="col" class="center-item-table">Nombres</th>
+                                    <th scope="col" class="center-item-table">Apellidos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of registers">
+                                    <td class="center-item-table">{{row.user?.name}}</td>
+                                    <td class="center-item-table">{{row.user?.last_name}}</td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <ng-template #noDataRegister>
+                            <p class="text-center mt-5">Sin usuarios registrados</p>
+                        </ng-template>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <img class="img-fluid" src="assets/images/conceptual-assist.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

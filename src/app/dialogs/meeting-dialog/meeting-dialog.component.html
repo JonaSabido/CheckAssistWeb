@@ -1,0 +1,143 @@
+<h4 mat-dialog-title class="color-secondary jakarta fs-5 border-bottom" *ngIf="data.type == 'create'"> Creando un nuevo
+    evento</h4>
+<h4 mat-dialog-title class="color-secondary jakarta fs-5 border-bottom" *ngIf="data.type == 'edit'"> Editando evento:
+    {{data.model.name}}
+</h4>
+
+
+<form #meetingForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <div mat-dialog-content>
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-6 mt-3">
+                            <label class="arial fw-bold color-primary-900 mb-1" for="name">Nombre</label>
+                            <input class="form-control" type="text" id="name" name="name" [(ngModel)]="data.model.name"
+                                placeholder="Escribe el nombre de tu evento" #name="ngModel" required maxlength="50">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                                <label class="text-error" *ngIf="name.errors && name.errors['required']"
+                                    class="error">Este
+                                    campo es
+                                    requerido.</label>
+                                <label class="text-error" *ngIf="name.errors && name.errors['maxlength']"
+                                    class="error">Este
+                                    campo
+                                    acepta máximo 50 caractéres</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mt-3">
+                            <label class="arial fw-bold color-primary-900 mb-1" for="code_meeting">Código de
+                                evento</label>
+                            <input class="form-control" type="text" id="code_meeting" name="code_meeting"
+                                [(ngModel)]="data.model.code_meeting" placeholder="Escribe un código para tu evento"
+                                #code_meeting="ngModel" required maxlength="50">
+                            <div *ngIf="code_meeting.invalid && (code_meeting.dirty || code_meeting.touched)">
+                                <label class="text-error" *ngIf="code_meeting.errors && code_meeting.errors['required']"
+                                    class="error">Este
+                                    campo es
+                                    requerido.</label>
+                                <label class="text-error"
+                                    *ngIf="code_meeting.errors && code_meeting.errors['maxlength']" class="error">Este
+                                    campo
+                                    acepta máximo 50 caractéres</label>
+                            </div>
+                        </div>
+
+
+                        <div class="mt-3 col-12">
+                            <label class="arial fw-bold color-primary-900 mb-1" for="description">Descripción</label>
+                            <textarea class="form-control" id="description" name="description"
+                                [(ngModel)]="data.model.description"
+                                placeholder="Escribe una descripción para tu evento" #description="ngModel" required
+                                maxlength="300" style="height: 150px;"></textarea>
+                            <div *ngIf="description.invalid && (description.dirty || description.touched)">
+                                <label class="text-error" *ngIf="description.errors && description.errors['required']"
+                                    class="error">Este
+                                    campo es
+                                    requerido.</label>
+                                <label class="text-error" *ngIf="name.errors && name.errors['maxlength']"
+                                    class="error">Este
+                                    campo
+                                    acepta máximo 300 caractéres</label>
+                            </div>
+                        </div>
+
+
+                        <div class="mt-3 col-lg-4">
+                            <label class="arial fw-bold color-primary-900 mb-1" for="date_meeting">Fecha</label>
+                            <input class="form-control" type="date" id="date_meeting" name="date_meeting"
+                                [(ngModel)]="data.model.date_meeting" placeholder="Escribe el nombre de su evento"
+                                #date_meeting="ngModel" required>
+                            <div *ngIf="date_meeting.invalid && (date_meeting.dirty || date_meeting.touched)">
+                                <label class="text-error" *ngIf="date_meeting.errors && date_meeting.errors['required']"
+                                    class="error">Este
+                                    campo es
+                                    requerido.</label>
+                            </div>
+                        </div>
+
+
+                        <div class="mt-3 col-lg-4 mt-3 ">
+                            <label class="arial fw-bold color-primary-900 mb-1" for="start_hour">Hora Entrada</label>
+                            <input class="form-control" type="time" id="start_hour" name="start_hour"
+                                [(ngModel)]="data.model.start_hour" placeholder="Escribe el nombre de su evento"
+                                #start_hour="ngModel" required maxlength="50">
+                            <div *ngIf="start_hour.invalid && (start_hour.dirty || start_hour.touched)">
+                                <label class="text-error" *ngIf="start_hour.errors && start_hour.errors['required']"
+                                    class="error">Este
+                                    campo es
+                                    requerido.</label>
+                                <label class="text-error" *ngIf="start_hour.errors && start_hour.errors['maxlength']"
+                                    class="error">Este
+                                    campo
+                                    acepta máximo 50 caractéres</label>
+                            </div>
+                        </div>
+                        <div class="mt-3 col-lg-4 mt-3">
+                            <label class="arial fw-bold color-primary-900 mb-1" for="end_hour">Hora de salida</label>
+                            <input class="form-control" type="time" id="end_hour" name="end_hour"
+                                [(ngModel)]="data.model.end_hour" placeholder="Escribe el nombre de su evento"
+                                #end_hour="ngModel" required maxlength="50">
+                            <div *ngIf="end_hour.invalid && (end_hour.dirty || end_hour.touched)">
+                                <label class="text-error" *ngIf="end_hour.errors && end_hour.errors['required']"
+                                    class="error">Este
+                                    campo es
+                                    requerido.</label>
+                                <label class="text-error" *ngIf="end_hour.errors && end_hour.errors['maxlength']"
+                                    class="error">Este
+                                    campo
+                                    acepta máximo 50 caractéres</label>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 col-12">
+                            <label class="arial fw-bold color-primary-900 mb-1" for="date">Selecciona un punto de
+                                reunión</label>
+                            <br>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59622.184649599134!2d-89.6709955783203!3d20.936986699999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f5671afdebee2bf%3A0xcd0d7c99d5e6be4!2sPizza%20y%20Corre%20MID%20-%20STEAK!5e0!3m2!1ses-419!2smx!4v1698222768669!5m2!1ses-419!2smx"
+                                width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <img class="img-fluid" src="assets/images/conceptual-meeting.png">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div mat-dialog-actions align="center" class="d-flex align-items-center border-top">
+        <button class="button-return m-1" (click)="closeDialog()">Volver</button>
+        <button class="button-save m-1" type="submit" (click)="closeDialog()"
+            [disabled]="meetingForm.invalid">Guardar</button>
+    </div>
+</form>
