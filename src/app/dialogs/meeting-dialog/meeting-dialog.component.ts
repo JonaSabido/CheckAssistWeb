@@ -14,6 +14,8 @@ import { MeetingService } from 'src/app/services/meeting.service';
 })
 export class MeetingDialogComponent {
 
+  today = new Date().toISOString().slice(0, 10)
+
   constructor(
     private dialog: MatDialogRef<MeetingDialogComponent>,
     private service: MeetingService,
@@ -24,16 +26,38 @@ export class MeetingDialogComponent {
     this.dialog.close(true);
   }
 
+
+  create() {
+    this.service.store(this.data.model).subscribe({
+      next: (response) => {
+        this.closeDialog()
+      },
+      error: (e) => {
+
+      }
+    })
+  }
+
+  update() {
+    this.service.update(this.data.model.id, this.data.model).subscribe({
+      next: (response) => {
+        this.closeDialog()
+      },
+      error: (e) => {
+
+      }
+    })
+  }
+
   onSubmit() {
     if (PROPERTIES_FILLED(this.data.model)) {
-      this.service.store(this.data.model).subscribe({
-        next: (response) => {
-          this.closeDialog()
-        },
-        error: (e) => {
-          
-        }
-      })
+      if (this.data.type == 'create') {
+        this.create()
+      }
+      else {
+        this.update()
+      }
+
     }
 
   }

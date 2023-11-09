@@ -39,6 +39,8 @@ export class MyMeetingsComponent implements OnInit {
 
   filters: FilterParams<Meeting> = {}
 
+  showFilters: boolean = false;
+
   constructor(
     private dialog: MatDialog,
     private service: MeetingService,
@@ -80,6 +82,14 @@ export class MyMeetingsComponent implements OnInit {
     }).afterClosed().subscribe(value => {
       this.reload()
     })
+  }
+
+  switchFilters() {
+    this.showFilters = !this.showFilters
+    if (!this.showFilters) {
+      this.filters = {}
+      this.reload()
+    }
   }
 
 

@@ -1,34 +1,55 @@
-<div class="card p-4" style="z-index: 1;">
+<div class="card card-panel p-4" style="z-index: 1;">
     <div class="card-header bg-white border-0">
         <div class="d-md-flex justify-content-between align-items-center">
-            <div class="">
-                <h3 class="fs-2 color-secondary montserrat"> Mis proximos eventos</h3>
+            <div class="d-flex ">
+                <h3 class="fs-4 color-secondary montserrat"> Mis proximos eventos </h3>
+                <button class="btn-default ms-2">
+                    <span class="material-symbols-outlined color-primary-500 fs-4 clickeable" (click)="switchFilters()">
+                        tune
+                    </span>
+                </button>
             </div>
-            <button class="fill-button-primary-500" (click)="openDialog('create')"> Nuevo Evento</button>
+            <button class="fill-button-primary-500 fs-6 d-flex align-items-center" (click)="openDialog('create')">
+                <span class="material-symbols-outlined fs-6 m-1">
+                    calendar_add_on
+                </span>
+                Nuevo Evento
+            </button>
         </div>
-        <form #filtersForm="ngForm" (ngSubmit)="reload()" class="filters mt-3 d-md-flex">
-            <div class="w-100">
-                <label for="filter_name" class="label-filter">Nombre</label>
+        <form #filtersForm="ngForm" (ngSubmit)="reload()" class="filters mt-2 d-md-flex" *ngIf="showFilters">
+            <div class="w-100 mt-2">
+                <label for="filter_name" class="label-filter d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-6">match_case</span>
+                    Nombre
+                </label>
                 <input type="text" class="form form-filter w-100" placeholder="Busqueda por nombre"
                     [(ngModel)]="filters.name" name="filter_name" id="filter_name">
             </div>
-            <!-- <div class="w-100">
+            <!-- <div class="w-100 mt-2">
                 <label for="filter_date_meeting" class="label-filter">Despues de la fecha</label>
                 <input type="date" class="form form-filter w-100" [(ngModel)]="filters.date_meeting" name="filter_date"
                     id="filter_date">
             </div> -->
-            <div class="w-100">
-                <label for="filter_start_hour" class="label-filter">Hora de inicio</label>
+            <div class="w-100 mt-2">
+                <label for="filter_start_hour" class="label-filter d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-6">timer</span>
+                    Hora de inicio</label>
                 <input type="time" class="form form-filter w-100" [(ngModel)]="filters.start_hour"
                     name="filter_start_hour" id="filter_start_hour">
             </div>
-            <div class="w-100">
-                <label for="filter_end_hour" class="label-filter">Hora de finalización</label>
-                <input type="time" class="form form-filter w-100" [(ngModel)]="filters.end_hour"
-                    name="filter_end_hour" id="filter_end_hour">
+            <div class="w-100 mt-2">
+                <label for="filter_end_hour" class="label-filter d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-6">timer</span>
+                    Hora de finalización</label>
+                <input type="time" class="form form-filter w-100" [(ngModel)]="filters.end_hour" name="filter_end_hour"
+                    id="filter_end_hour">
             </div>
             <div class="d-flex align-items-end">
-                <button type="submit" class="button-search"> Buscar </button>
+                <button type="submit" class="button-search">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                </button>
             </div>
         </form>
 
@@ -36,10 +57,14 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4 mt-4" *ngFor="let row of entities">
-                <div [routerLink]="['/details', row.id]" class="p-4 card-meeting bg-primary-80">
-                    <p class="color-secondary arial text-size"> {{row.date_meeting}}</p>
-                    <h4 class="montserrat fs-4 color-secondary text-truncate">{{row.name}} </h4>
-                    <p class="color-secondary arial text-size"> {{row.start_hour}} - {{row.end_hour}} </p>
+                <div [routerLink]="['/details', row.id]" class="p-4 card-meeting bg-primary-80 mat-elevation-z3">
+                    <p class="color-secondary fw-bold arial fs-6 ">
+                        <span class="material-symbols-outlined fs-6 color-primary-900 fw-bold">calendar_month</span> {{row.date_meeting}}
+                    </p>
+                    <h4 class="montserrat fs-3 color-secondary text-truncate">{{row.name}} </h4>
+                    <p class="color-secondary fw-bold arial fs-6 ">
+                        <span class="material-symbols-outlined fs-6 color-primary-900 fw-bold">timer</span>{{row.start_hour}} - {{row.end_hour}}
+                    </p>
                 </div>
             </div>
         </div>

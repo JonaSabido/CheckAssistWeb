@@ -16,6 +16,11 @@ export class HistoryMeetingsComponent {
   entities: Meeting[] = []
 
   filters: FilterParams<Meeting> = {}
+
+  showFilters: boolean = false;
+
+  columns: string[] = ['name', 'date_meeting', 'start_hour', 'end_hour', 'options'];
+
   authUser: AuthUser = {
     id: 0,
     name: '',
@@ -45,6 +50,14 @@ export class HistoryMeetingsComponent {
         this.entities = []
       }
     })
+  }
+
+  switchFilters() {
+    this.showFilters = !this.showFilters
+    if (!this.showFilters) {
+      this.filters = {}
+      this.reload()
+    }
   }
 
 }

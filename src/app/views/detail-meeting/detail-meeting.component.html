@@ -1,13 +1,27 @@
-<div class="card p-4 bg-primary-80" style="z-index: 1;">
+<div class="card p-4 bg-primary-80 mat-elevation-z3" style="z-index: 1;">
     <div class="card-header bg-primary-80 border-0">
-        <h1 class="fs-1 color-secondary montserrat">{{meeting.name}}</h1>
+        <div class="d-flex align-items-center">
+            <h1 class="fs-1 color-secondary montserrat">{{meeting.name}}</h1>
+            <a class="color-primary-900 arial fs-6 fw-bold text-decoration-none clickeable" (click)="openDialog('edit')" *ngIf="meeting.date_meeting > today">
+                <span class="material-symbols-outlined fs-3 ms-2 color-primary-500">edit</span>
+            </a>
+        </div>
         <p class="color-secondary arial fs-6 "> {{meeting.description}}</p>
-        <p class="color-secondary arial fs-6 "> {{meeting.code_meeting}}</p>
-        <p class="color-secondary arial fs-6 fw-bold"> {{meeting.date_meeting}}</p>
-        <p class="color-secondary arial fs-6 fw-bold"> {{meeting.start_hour.slice(0,5)}} -
-            {{meeting.end_hour.slice(0,5)}}
+        <p class="arial fs-5 color-primary-900 fw-bold">
+            <span class="material-symbols-outlined fs-6">encrypted</span>
+            Código de acceso: {{meeting.code_meeting}}
         </p>
-        <a [routerLink]="''" class="color-primary-900 arial fs-6 fw-bold text-decoration-none"> Ver ubicación
+        <p class="color-secondary arial fs-6 fw-bold">
+            <span class="material-symbols-outlined fs-6">calendar_month</span>
+            {{meeting.date_meeting}}
+        </p>
+        <p class="color-secondary arial fs-6 fw-bold"> <span class="material-symbols-outlined fs-6">timer</span>
+            {{meeting.start_hour}} -
+            {{meeting.end_hour}}
+        </p>
+        <a [routerLink]="''" class="color-primary-900 arial fs-6 fw-bold text-decoration-none">
+            <span class="material-symbols-outlined fs-6">location_on</span>
+            Ver ubicación
             seleccionada</a>
 
     </div>
@@ -25,7 +39,7 @@
                         <a [routerLink]="''" class="color-secondary arial fs-6 fw-bold text-decoration-none">
                             Lista de asistencia</a>
                     </div>
-                    <!-- <form class="filters mt-3 d-md-flex">
+                    <!-- <form class="filters mt-2 d-md-flex">
                         <input type="text" class="form form-filter w-100" placeholder="Busqueda por nombre">
                         <button type="submit" class="button-search"> Buscar </button>
                     </form> -->

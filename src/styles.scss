@@ -32,6 +32,14 @@ $web-paselista-theme: mat.define-light-theme((color: (primary: $web-paselista-pr
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
 @font-face {
     font-family: JakartaBold;
     src: url(assets/fonts/PlusJakartaSans-ExtraBold.ttf);
@@ -343,4 +351,40 @@ body {
     color: $blue-900;
     font-size: .8em;
     font-weight: 500;
+}
+
+.card-panel {
+    min-height: 75vh;
+}
+
+.btn-default {
+    background-color: white;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+.responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.my-table {
+    width: 100%;
+}
+
+.my-table tbody tr:nth-child(odd) {
+    background-color: $blue-80;
+
+    &:hover {
+        background-color: $blue-100;
+    }
+}
+
+.my-table tbody tr:nth-child(even) {
+
+    &:hover {
+        background-color: #f9f9f9;
+    }
 }

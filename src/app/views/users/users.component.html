@@ -1,30 +1,47 @@
-<div class="card p-4" style="z-index: 1;">
+<div class="card card-panel p-4" style="z-index: 1;">
     <div class="card-header bg-white border-0">
         <div class="d-md-flex justify-content-between align-items-center">
-            <div class="">
-                <h3 class="fs-2 color-secondary montserrat"> Usuarios</h3>
+            <div class="d-flex ">
+                <h3 class="fs-4 color-secondary montserrat"> Usuarios </h3>
+                <button class="btn-default ms-2">
+                    <span class="material-symbols-outlined color-primary-500 fs-4 clickeable" (click)="switchFilters()">
+                        tune
+                    </span>
+                </button>
             </div>
-            <button class="fill-button-primary-500" (click)="openDialog('create')"> Nuevo Usuario</button>
-
+            <button class="fill-button-primary-500 fs-6 d-flex align-items-center" (click)="openDialog('create')">
+                <span class="material-symbols-outlined fs-6 m-1">
+                    person_add
+                </span>
+                Nuevo Usuario
+            </button>
         </div>
-        <form #filtersForm="ngForm" (ngSubmit)="reload()" class="filters mt-3 d-md-flex">
-            <div class="w-100">
-                <label for="filter_name" class="label-filter">Nombres</label>
+        <form #filtersForm="ngForm" (ngSubmit)="reload()" class="filters mt-2 d-md-flex" *ngIf="showFilters">
+            <div class="w-100 mt-2">
+                <label for="filter_name" class="label-filter d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-6">match_case</span>
+                    Nombres</label>
                 <input type="text" class="form form-filter w-100" placeholder="Busqueda por nombre"
                     [(ngModel)]="filters.name" name="filter_name" id="filter_name">
             </div>
-            <div class="w-100">
-                <label for="filter_last_name" class="label-filter">Apellidos</label>
+            <div class="w-100 mt-2">
+                <label for="filter_last_name" class="label-filter d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-6">match_case</span>
+                    Apellidos</label>
                 <input type="text" class="form form-filter w-100" placeholder="Busqueda por apellidos"
                     [(ngModel)]="filters.last_name" name="filter_last_name" id="filter_last_name">
             </div>
-            <div class="w-100">
-                <label for="filter_email" class="label-filter">Correo</label>
+            <div class="w-100 mt-2">
+                <label for="filter_email" class="label-filter d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-6">alternate_email</span>
+                    Correo</label>
                 <input type="text" class="form form-filter w-100" placeholder="Busqueda por correo"
                     [(ngModel)]="filters.email" name="filter_email" id="filter_email">
             </div>
-            <div class="w-100">
-                <label for="filter_profile" class="label-filter">Perfil</label>
+            <div class="w-100 mt-2">
+                <label for="filter_profile" class="label-filter d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-6">person</span>
+                    Perfil</label>
                 <select class="form form-filter w-100 p-0" [(ngModel)]="filters.id_profile" name="filter_profile"
                     id="filter_profile">
                     <option [value]=0> Todos </option>
@@ -32,15 +49,62 @@
                 </select>
             </div>
             <div class="d-flex align-items-end">
-                <button type="submit" class="button-search"> Buscar </button>
+                <button type="submit" class="button-search">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                </button>
             </div>
         </form>
 
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-responsive table-hover table-bordered">
+        <div class="responsive mat-elevation-z3">
+            <table mat-table [dataSource]="entities" class="my-table ">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Nombres</th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
 
+                <ng-container matColumnDef="last_name">
+                    <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+                    <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Correo </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="profile_name">
+                    <th mat-header-cell *matHeaderCellDef> Perfil </th>
+                    <td mat-cell *matCellDef="let element"> {{element.profile?.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="options">
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Opciones </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="d-flex justify-content-center">
+                            <a class="btn text-primary" (click)="openDialog('edit', element)">
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                            </a>
+                            <a class="btn text-danger">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </a>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+            </table>
+        </div>
+        <!-- <div class="table-responsive">
+            <table class="table table-responsive table-hover table-bordered">
                 <thead>
                     <tr class="">
                         <th scope="col" class="center-item-table">Nombres</th>
@@ -60,7 +124,7 @@
                         <td class="center-item-table">
                             <div class="d-flex" style="justify-content: space-evenly;">
                                 <a class="btn text-primary" (click)="openDialog('edit', row)"> Editar </a>
-                                <!-- <a class="btn text-danger"> Eliminar </a> -->
+                                <a class="btn text-danger"> Eliminar </a>
 
                             </div>
                         </td>
@@ -69,7 +133,7 @@
                 </tbody>
             </table>
 
-        </div>
+        </div> -->
         <!-- <div class="d-flex justify-content-end mt-4 w-100 overflow-x-auto">
             <div class="d-flex justify-content-center">
                 <a class="button-pagination">1</a>

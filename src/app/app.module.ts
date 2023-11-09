@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UsersComponent } from './views/users/users.component';
 import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component';
+import { MatTableModule } from '@angular/material/table'
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component
     MatDialogModule,
     FormsModule,
     HttpClientModule,
+    MatTableModule,
     JwtModule.forRoot({
       config: {}
     })

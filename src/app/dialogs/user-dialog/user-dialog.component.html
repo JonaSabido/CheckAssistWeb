@@ -108,8 +108,14 @@
 
 
     <div mat-dialog-actions align="center" class="d-flex align-items-center border-top">
-        <button class="button-return m-1" (click)="closeDialog()">Volver</button>
-        <button class="button-save m-1" type="submit" (click)="closeDialog()"
-            [disabled]="meetingForm.invalid">Guardar</button>
+        <button type="button" class="button-return m-1 d-flex align-items-center" (click)="closeDialog()">
+            <span class="material-symbols-outlined fs-5 me-1">
+                arrow_back
+            </span>Volver</button>
+        <button class="button-save m-1 d-flex align-items-center" type="submit" (click)="closeDialog()"
+            [disabled]="meetingForm.invalid">
+            <span class="material-symbols-outlined fs-5 m-1">
+                save
+            </span>Guardar</button>
     </div>
 </form>

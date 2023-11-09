@@ -15,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-  
+
   entity: User = {
     id: 0,
     name: '',
@@ -30,6 +30,11 @@ export class UsersComponent {
   filters: FilterParams<User> = {
     id_profile: 0
   }
+
+  showFilters: boolean = false;
+
+  columns: string[] = ['name', 'last_name', 'email', 'profile_name', 'options'];
+
   authUser: AuthUser = {
     id: 0,
     name: '',
@@ -79,6 +84,16 @@ export class UsersComponent {
       console.log('a')
       this.reload()
     })
+  }
+
+  switchFilters() {
+    this.showFilters = !this.showFilters
+    if (!this.showFilters) {
+      this.filters = {
+        id_profile: 0
+      }
+      this.reload()
+    }
   }
 
 }

@@ -15,7 +15,7 @@
                         <div class="col-lg-6 mt-3">
                             <label class="arial fw-bold color-primary-900 mb-1" for="name">Nombre</label>
                             <input class="form-control" type="text" id="name" name="name" [(ngModel)]="data.model.name"
-                                placeholder="Escribe el nombre de tu evento" #name="ngModel" required maxlength="50">
+                                placeholder="Escribe el nombre de tu evento" #name="ngModel" required maxlength="100">
                             <div *ngIf="name.invalid && (name.dirty || name.touched)">
                                 <label class="text-error" *ngIf="name.errors && name.errors['required']"
                                     class="error">Este
@@ -24,7 +24,7 @@
                                 <label class="text-error" *ngIf="name.errors && name.errors['maxlength']"
                                     class="error">Este
                                     campo
-                                    acepta máximo 50 caractéres</label>
+                                    acepta máximo 100 caractéres</label>
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@
                                 evento</label>
                             <input class="form-control" type="text" id="code_meeting" name="code_meeting"
                                 [(ngModel)]="data.model.code_meeting" placeholder="Escribe un código para tu evento"
-                                #code_meeting="ngModel" required maxlength="50">
+                                #code_meeting="ngModel" required maxlength="20" [disabled]="data.type == 'edit'">
                             <div *ngIf="code_meeting.invalid && (code_meeting.dirty || code_meeting.touched)">
                                 <label class="text-error" *ngIf="code_meeting.errors && code_meeting.errors['required']"
                                     class="error">Este
@@ -42,7 +42,7 @@
                                 <label class="text-error"
                                     *ngIf="code_meeting.errors && code_meeting.errors['maxlength']" class="error">Este
                                     campo
-                                    acepta máximo 50 caractéres</label>
+                                    acepta máximo 20 caractéres</label>
                             </div>
                         </div>
 
@@ -52,7 +52,7 @@
                             <textarea class="form-control" id="description" name="description"
                                 [(ngModel)]="data.model.description"
                                 placeholder="Escribe una descripción para tu evento" #description="ngModel" required
-                                maxlength="300" style="height: 150px;"></textarea>
+                                maxlength="255" style="height: 150px;"></textarea>
                             <div *ngIf="description.invalid && (description.dirty || description.touched)">
                                 <label class="text-error" *ngIf="description.errors && description.errors['required']"
                                     class="error">Este
@@ -61,7 +61,7 @@
                                 <label class="text-error" *ngIf="name.errors && name.errors['maxlength']"
                                     class="error">Este
                                     campo
-                                    acepta máximo 300 caractéres</label>
+                                    acepta máximo 255 caractéres</label>
                             </div>
                         </div>
 
@@ -76,7 +76,10 @@
                                     class="error">Este
                                     campo es
                                     requerido.</label>
+
+
                             </div>
+                            
                         </div>
 
 
@@ -136,8 +139,16 @@
 
 
     <div mat-dialog-actions align="center" class="d-flex align-items-center border-top">
-        <button class="button-return m-1" (click)="closeDialog()">Volver</button>
-        <button class="button-save m-1" type="submit" (click)="closeDialog()"
-            [disabled]="meetingForm.invalid">Guardar</button>
+        <button type="button" class="button-return m-1 d-flex align-items-center" (click)="closeDialog()">
+            <span class="material-symbols-outlined fs-5 me-1">
+                arrow_back
+            </span>
+            Volver</button>
+        <button class="button-save m-1 d-flex align-items-center" type="submit" (click)="closeDialog()"
+            [disabled]="meetingForm.invalid">
+            <span class="material-symbols-outlined fs-5 m-1">
+                save
+            </span>
+            Guardar</button>
     </div>
 </form>
