@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterParams } from 'shared/services/api.service';
+import { AlertDeleteError, AlertDeleteSuccess } from 'shared/utils/alerts';
+import { Confirm } from 'shared/utils/alerts-config';
 import { AuthUser } from 'src/app/interfaces/auth.interface';
 import { Meeting } from 'src/app/interfaces/meeting.interface'
 import { JwtService } from 'src/app/services/jwt.service';
@@ -58,6 +60,29 @@ export class HistoryMeetingsComponent {
       this.filters = {}
       this.reload()
     }
+  }
+
+  delete(name: string, id: number) {
+    Confirm.fire({
+      title: '¿Esta seguro que desea eliminar el evento: ' + name + '?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+    }).then(result => {
+      if (result.value) {
+        this.service.destroy(id).subscribe({
+          next: (response) => {
+            AlertDeleteSuccess()
+            this.reload()
+          },
+          error: (e) => {
+            AlertDeleteError()
+          }
+        })
+      }
+    })
   }
 
 }

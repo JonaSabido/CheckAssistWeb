@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterParams } from 'shared/services/api.service';
+import { DIFFERENCE_BETWEEN_TWO_DATES, TODAY } from 'shared/utils/constants';
 import { MeetingDialogComponent } from 'src/app/dialogs/meeting-dialog/meeting-dialog.component';
 import { AuthUser } from 'src/app/interfaces/auth.interface';
 import { DataDialog } from 'src/app/interfaces/data-dialog.interface';
@@ -40,6 +41,8 @@ export class MyMeetingsComponent implements OnInit {
   filters: FilterParams<Meeting> = {}
 
   showFilters: boolean = false;
+
+  today = TODAY
 
   constructor(
     private dialog: MatDialog,
@@ -90,6 +93,10 @@ export class MyMeetingsComponent implements OnInit {
       this.filters = {}
       this.reload()
     }
+  }
+
+  calculateDifferenceDays(d1: string, d2: string) {
+    return DIFFERENCE_BETWEEN_TWO_DATES(d1, d2)
   }
 
 

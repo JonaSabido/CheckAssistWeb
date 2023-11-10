@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterParams } from 'shared/services/api.service';
+import { AlertDeleteError, AlertDeleteSuccess } from 'shared/utils/alerts';
+import { Confirm } from 'shared/utils/alerts-config';
 import { PROFILES } from 'src/app/consts/profiles';
 import { UserDialogComponent } from 'src/app/dialogs/user-dialog/user-dialog.component';
 import { AuthUser } from 'src/app/interfaces/auth.interface';
@@ -81,7 +83,6 @@ export class UsersComponent {
       autoFocus: false
 
     }).afterClosed().subscribe(value => {
-      console.log('a')
       this.reload()
     })
   }
@@ -94,6 +95,29 @@ export class UsersComponent {
       }
       this.reload()
     }
+  }
+
+  delete(email: string, id: number) {
+    Confirm.fire({
+      title: '¿Esta seguro que desea eliminar el usuario: ' + email + '?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+    }).then(result => {
+      if (result.value) {
+        this.service.destroy(id).subscribe({
+          next: (response) => {
+            AlertDeleteSuccess()
+            this.reload()
+          },
+          error: (e) => {
+            AlertDeleteError()
+          }
+        })
+      }
+    })
   }
 
 }

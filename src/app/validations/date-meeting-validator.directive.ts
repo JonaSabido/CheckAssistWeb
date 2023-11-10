@@ -1,5 +1,6 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
+import { TODAY } from 'shared/utils/constants';
 
 @Directive({
   selector: '[dateMeetingValidator]',
@@ -8,7 +9,7 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 })
 export class DateMeetingValidatorDirective implements Validator {
 
-  today = new Date().toISOString().slice(0, 10)
+  today = TODAY
 
   validate(control: AbstractControl): ValidationErrors {
     const value = <string>control.value

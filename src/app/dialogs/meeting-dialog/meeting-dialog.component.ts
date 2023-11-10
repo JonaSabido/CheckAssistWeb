@@ -6,6 +6,8 @@ import { Dialog } from '@angular/cdk/dialog';
 import { DataDialog } from 'src/app/interfaces/data-dialog.interface';
 import { PROPERTIES_FILLED } from 'src/app/consts/functions';
 import { MeetingService } from 'src/app/services/meeting.service';
+import { AlertDeleteError, AlertDeleteSuccess, AlertSaveError, AlertSaveSuccess, AlertShowCode } from 'shared/utils/alerts';
+import { TODAY } from 'shared/utils/constants';
 
 @Component({
   selector: 'app-meeting-dialog',
@@ -14,7 +16,7 @@ import { MeetingService } from 'src/app/services/meeting.service';
 })
 export class MeetingDialogComponent {
 
-  today = new Date().toISOString().slice(0, 10)
+  today = TODAY
 
   constructor(
     private dialog: MatDialogRef<MeetingDialogComponent>,
@@ -31,9 +33,12 @@ export class MeetingDialogComponent {
     this.service.store(this.data.model).subscribe({
       next: (response) => {
         this.closeDialog()
+        AlertSaveSuccess(1000).then(value => {
+          AlertShowCode(response.data.code_meeting)
+        })
       },
       error: (e) => {
-
+        AlertSaveError()
       }
     })
   }
@@ -41,10 +46,11 @@ export class MeetingDialogComponent {
   update() {
     this.service.update(this.data.model.id, this.data.model).subscribe({
       next: (response) => {
+        AlertSaveSuccess()
         this.closeDialog()
       },
       error: (e) => {
-
+        AlertSaveError()
       }
     })
   }

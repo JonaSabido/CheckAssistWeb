@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertDeleteError, AlertDeleteSuccess } from 'shared/utils/alerts';
+import { Confirm } from 'shared/utils/alerts-config';
+import { TODAY } from 'shared/utils/constants';
 import { MeetingDialogComponent } from 'src/app/dialogs/meeting-dialog/meeting-dialog.component';
 import { DataDialog } from 'src/app/interfaces/data-dialog.interface';
 import { Meeting } from 'src/app/interfaces/meeting.interface';
@@ -33,7 +36,7 @@ export class DetailMeetingComponent {
 
   id: number = 0;
 
-  today = new Date().toISOString().slice(0,10)
+  today = TODAY
 
 
 
@@ -42,6 +45,8 @@ export class DetailMeetingComponent {
     private service: MeetingService,
     private serviceMeetingUser: MeetingUserService,
     private dialog: MatDialog,
+    public router: Router
+
 
   ) {
     this.route.params.subscribe(params => {
@@ -74,6 +79,30 @@ export class DetailMeetingComponent {
 
     }).afterClosed().subscribe(value => {
       this.getData()
+    })
+  }
+
+  delete() {
+    Confirm.fire({
+      title: '¿Esta seguro que desea eliminar este evento?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+    }).then(result => {
+      if (result.value) {
+        this.service.destroy(this.meeting.id).subscribe({
+          next: (response) => {
+            AlertDeleteSuccess()
+            this.router.navigate(['/my-meetings'], { relativeTo: this.route });
+
+          },
+          error: (e) => {
+            AlertDeleteError()
+          }
+        })
+      }
     })
   }
 

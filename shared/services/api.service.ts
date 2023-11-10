@@ -70,8 +70,8 @@ export abstract class ApiService<T>  {
      * @param e The entity to be saved as new
      * @return an `Observable` of the saved entity of type `<T>`
      */
-    public store(e: T): Observable<T> {
-        return this.http.post<T>(this.uri, e, this.options);
+    public store(e: T): Observable<OnlyEntity<T>> {
+        return this.http.post<OnlyEntity<T>>(this.uri, e, this.options);
     }
 
 

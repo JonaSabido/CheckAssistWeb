@@ -58,12 +58,23 @@
         <div class="row">
             <div class="col-md-4 mt-4" *ngFor="let row of entities">
                 <div [routerLink]="['/details', row.id]" class="p-4 card-meeting bg-primary-80 mat-elevation-z3">
-                    <p class="color-secondary fw-bold arial fs-6 ">
-                        <span class="material-symbols-outlined fs-6 color-primary-900 fw-bold">calendar_month</span> {{row.date_meeting}}
-                    </p>
+                    <div class="d-flex justify-content-between">
+                        <p class="color-secondary fw-bold arial fs-6 ">
+                            <span class="material-symbols-outlined fs-6 color-primary-900 fw-bold">calendar_month</span>
+                            {{row.date_meeting}}
+                        </p>
+                        <p class="fw-bold arial fs-6" *ngIf="row.date_meeting == today" style="color: green">
+                            ¡Hoy!
+                        </p>
+                        <p class="color-primary-900 fw-bold arial fs-6" *ngIf="calculateDifferenceDays(today, row.date_meeting) == 1">
+                            ¡Mañana!
+                        </p>
+                    </div>
                     <h4 class="montserrat fs-3 color-secondary text-truncate">{{row.name}} </h4>
                     <p class="color-secondary fw-bold arial fs-6 ">
-                        <span class="material-symbols-outlined fs-6 color-primary-900 fw-bold">timer</span>{{row.start_hour}} - {{row.end_hour}}
+                        <span
+                            class="material-symbols-outlined fs-6 color-primary-900 fw-bold">timer</span>{{row.start_hour}}
+                        - {{row.end_hour}}
                     </p>
                 </div>
             </div>

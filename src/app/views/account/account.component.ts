@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertSaveError, AlertSaveSuccess } from 'shared/utils/alerts';
 import { User } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -38,9 +39,11 @@ export class AccountComponent {
     this.showSuccess = false
     this.userService.update(this.user.id, this.user).subscribe({
       next: (response) => {
+        AlertSaveSuccess()
         this.showSuccess = true
       },
       error: (e) => {
+        AlertSaveError()
         this.showError = true
       }
     })

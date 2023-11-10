@@ -5,6 +5,7 @@ import { DataDialog } from 'src/app/interfaces/data-dialog.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import { PROFILES } from 'src/app/consts/profiles';
+import { AlertSaveError, AlertSaveSuccess } from 'shared/utils/alerts';
 
 @Component({
   selector: 'app-user-dialog',
@@ -30,6 +31,7 @@ export class UserDialogComponent {
   create() {
     this.service.store(this.data.model).subscribe({
       next: (response) => {
+        AlertSaveSuccess()
         this.closeDialog()
       },
       error: (e) => {
@@ -41,10 +43,11 @@ export class UserDialogComponent {
   update() {
     this.service.update(this.data.model.id, this.data.model).subscribe({
       next: (response) => {
+        AlertSaveSuccess()
         this.closeDialog()
       },
       error: (e) => {
-
+        AlertSaveError()
       }
     })
   }
