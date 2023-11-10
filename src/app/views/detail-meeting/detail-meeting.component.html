@@ -2,7 +2,7 @@
     <div class="card-header bg-primary-80 border-0">
         <div class="d-flex align-items-center">
             <h1 class="fs-1 color-secondary montserrat">{{meeting.name}}</h1>
-            <a class="color-primary-900 arial fs-6 fw-bold text-decoration-none clickeable" (click)="openDialog('edit')" *ngIf="meeting.date_meeting > today">
+            <a class="color-primary-900 arial fs-6 fw-bold text-decoration-none clickeable" (click)="openDialog('edit')" *ngIf="meeting.date_meeting >= today">
                 <span class="material-symbols-outlined fs-3 ms-2 color-primary-500">edit</span>
             </a>
         </div>

@@ -66,53 +66,58 @@
                         </div>
 
 
-                        <div class="mt-3 col-lg-4">
+                        <div class="mt-3 col-lg-12">
                             <label class="arial fw-bold color-primary-900 mb-1" for="date_meeting">Fecha</label>
                             <input class="form-control" type="date" id="date_meeting" name="date_meeting"
                                 [(ngModel)]="data.model.date_meeting" placeholder="Escribe el nombre de su evento"
-                                #date_meeting="ngModel" required>
+                                #date_meeting="ngModel" required dateMeetingValidator>
                             <div *ngIf="date_meeting.invalid && (date_meeting.dirty || date_meeting.touched)">
                                 <label class="text-error" *ngIf="date_meeting.errors && date_meeting.errors['required']"
                                     class="error">Este
                                     campo es
                                     requerido.</label>
 
+                                <label class="text-error"
+                                    *ngIf="date_meeting.errors && date_meeting.errors['dateMeetingValidator']"
+                                    class="error">{{date_meeting.errors['dateMeetingValidator'].message}}
+                                </label>
+
 
                             </div>
-                            
+
                         </div>
 
 
-                        <div class="mt-3 col-lg-4 mt-3 ">
+                        <div class="mt-3 col-lg-6 mt-3 ">
                             <label class="arial fw-bold color-primary-900 mb-1" for="start_hour">Hora Entrada</label>
                             <input class="form-control" type="time" id="start_hour" name="start_hour"
                                 [(ngModel)]="data.model.start_hour" placeholder="Escribe el nombre de su evento"
-                                #start_hour="ngModel" required maxlength="50">
+                                #start_hour="ngModel" required startHourValidator [endHour]="data.model.end_hour">
                             <div *ngIf="start_hour.invalid && (start_hour.dirty || start_hour.touched)">
                                 <label class="text-error" *ngIf="start_hour.errors && start_hour.errors['required']"
                                     class="error">Este
                                     campo es
                                     requerido.</label>
-                                <label class="text-error" *ngIf="start_hour.errors && start_hour.errors['maxlength']"
-                                    class="error">Este
-                                    campo
-                                    acepta máximo 50 caractéres</label>
+                                <label class="text-error" *ngIf="start_hour.errors && start_hour.errors['startHourValidator']"
+                                    class="error">{{start_hour.errors['startHourValidator'].message}}
+                                </label>
+
                             </div>
                         </div>
-                        <div class="mt-3 col-lg-4 mt-3">
+                        <div class="mt-3 col-lg-6 mt-3">
                             <label class="arial fw-bold color-primary-900 mb-1" for="end_hour">Hora de salida</label>
                             <input class="form-control" type="time" id="end_hour" name="end_hour"
                                 [(ngModel)]="data.model.end_hour" placeholder="Escribe el nombre de su evento"
-                                #end_hour="ngModel" required maxlength="50">
-                            <div *ngIf="end_hour.invalid && (end_hour.dirty || end_hour.touched)">
+                                #end_hour="ngModel" required endHourValidator [startHour]="data.model.start_hour">
+                            <div
+                                *ngIf="end_hour.invalid && (end_hour.dirty || end_hour.touched)">
                                 <label class="text-error" *ngIf="end_hour.errors && end_hour.errors['required']"
                                     class="error">Este
                                     campo es
                                     requerido.</label>
-                                <label class="text-error" *ngIf="end_hour.errors && end_hour.errors['maxlength']"
-                                    class="error">Este
-                                    campo
-                                    acepta máximo 50 caractéres</label>
+                                <label class="text-error" *ngIf="end_hour.errors && end_hour.errors['endHourValidator']"
+                                    class="error">{{end_hour.errors['endHourValidator'].message}}
+                                </label>
                             </div>
                         </div>
 
@@ -144,7 +149,7 @@
                 arrow_back
             </span>
             Volver</button>
-        <button class="button-save m-1 d-flex align-items-center" type="submit" (click)="closeDialog()"
+        <button class="button-save m-1 d-flex align-items-center" type="submit"
             [disabled]="meetingForm.invalid">
             <span class="material-symbols-outlined fs-5 m-1">
                 save

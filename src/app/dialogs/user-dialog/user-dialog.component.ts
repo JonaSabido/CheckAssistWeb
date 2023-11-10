@@ -25,30 +25,38 @@ export class UserDialogComponent {
   }
 
   ngOnInit() {
-    console.log(this.data.type)
   }
+
+  create() {
+    this.service.store(this.data.model).subscribe({
+      next: (response) => {
+        this.closeDialog()
+      },
+      error: (e) => {
+
+      }
+    })
+  }
+
+  update() {
+    this.service.update(this.data.model.id, this.data.model).subscribe({
+      next: (response) => {
+        this.closeDialog()
+      },
+      error: (e) => {
+
+      }
+    })
+  }
+
 
   onSubmit() {
     if (PROPERTIES_FILLED(this.data.model)) {
       if (this.data.type == 'create') {
-        this.service.store(this.data.model).subscribe({
-          next: (response) => {
-            this.closeDialog()
-          },
-          error: (e) => {
-
-          }
-        })
+        this.create()
       }
       else {
-        this.service.update(this.data.model.id, this.data.model).subscribe({
-          next: (response) => {
-            this.closeDialog()
-          },
-          error: (e) => {
-
-          }
-        })
+        this.update()
       }
 
     }

@@ -24,7 +24,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UsersComponent } from './views/users/users.component';
 import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component';
-import { MatTableModule } from '@angular/material/table'
+import { MatTableModule } from '@angular/material/table';
+import { DateMeetingValidatorDirective } from './validations/date-meeting-validator.directive';
+import { EndHourValidatorDirective } from './validations/end-hour-validator.directive';
+import { StartHourValidatorDirective } from './validations/start-hour-validator.directive'
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { MatTableModule } from '@angular/material/table'
     DetailMeetingComponent,
     UsersComponent,
     UserDialogComponent,
+    DateMeetingValidatorDirective,
+    EndHourValidatorDirective,
+    StartHourValidatorDirective,
   ],
   imports: [
     BrowserModule,

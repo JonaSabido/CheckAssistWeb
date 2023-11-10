@@ -3,18 +3,22 @@
         <div class="sidebar-header d-flex justify-content-center align-items-center p-2">
         </div>
         <div class="sidebar-body">
-            <div class="d-flex justify-content-center text-white icon-sidebar p-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="40" height="40"
+            <div class="d-flex justify-content-center text-white icon-sidebar p-3" title="Inicio">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="40" height="40"
                     viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M5 12l-2 0l9 -9l9 9l-2 0"></path>
                     <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
                     <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path>
-                </svg>
+                </svg> -->
+                <span class="material-symbols-outlined fs-1">
+                    home
+                </span>
             </div>
-            <div class="d-flex justify-content-center text-white icon-sidebar p-3" [routerLink]="'my-meetings'">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="40"
+            <div class="d-flex justify-content-center text-white icon-sidebar p-3" [routerLink]="'my-meetings'"
+                title="Mis próximos eventos">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="40"
                     height="40" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -24,10 +28,14 @@
                     <path d="M8 3l0 4"></path>
                     <path d="M4 11l16 0"></path>
                     <path d="M8 15h2v2h-2z"></path>
-                </svg>
+                </svg> -->
+                <span class="material-symbols-outlined fs-1">
+                    event
+                </span>
             </div>
-            <div class="d-flex justify-content-center text-white  icon-sidebar p-3" [routerLink]="'history-meetings'">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-stats" width="40"
+            <div class="d-flex justify-content-center text-white  icon-sidebar p-3" [routerLink]="'history-meetings'"
+                title="Historial de eventos">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-stats" width="40"
                     height="40" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -37,10 +45,30 @@
                     <path d="M15 3v4"></path>
                     <path d="M7 3v4"></path>
                     <path d="M3 11h16"></path>
-                </svg>
+                </svg> -->
+                <span class="material-symbols-outlined fs-1">
+                    calendar_clock
+                </span>
             </div>
-            <div class="d-flex justify-content-center text-white  icon-sidebar p-3" [routerLink]="''">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout-2" width="40"
+            <div class="d-flex justify-content-center text-white  icon-sidebar p-3" [routerLink]="'users'"
+                title="Usuarios">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-stats" width="40"
+                    height="40" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"></path>
+                    <path d="M18 14v4h4"></path>
+                    <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+                    <path d="M15 3v4"></path>
+                    <path d="M7 3v4"></path>
+                    <path d="M3 11h16"></path>
+                </svg> -->
+                <span class="material-symbols-outlined fs-1">
+                    group
+                </span>
+            </div>
+            <div class="d-flex justify-content-center text-white icon-sidebar p-3" [routerLink]="''" title="Salir">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout-2" width="40"
                     height="40" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -48,10 +76,13 @@
                     </path>
                     <path d="M15 12h-12l3 -3"></path>
                     <path d="M6 15l-3 -3"></path>
-                </svg>
+                </svg> -->
+                <span class="material-symbols-outlined fs-1 ">
+                    logout
+                </span>
             </div>
         </div>
 
     </div>
-    
+
 </div>

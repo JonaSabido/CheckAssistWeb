@@ -16,34 +16,35 @@
                 <div class="col-md-6 mt-3">
                     <label class="arial fw-bold color-primary-900 mb-1" for="name">Nombres</label>
                     <input class="form-control" type="text" id="name" name="name" [(ngModel)]="user.name"
-                        placeholder="Escriba sus nombres" #name="ngModel" required maxlength="50">
+                        placeholder="Escriba sus nombres" #name="ngModel" required maxlength="100">
                     <div *ngIf="name.invalid && (name.dirty || name.touched)">
                         <label class="text-error" *ngIf="name.errors && name.errors['required']" class="error">Este
                             campo es
                             requerido.</label>
                         <label class="text-error" *ngIf="name.errors && name.errors['maxlength']" class="error">Este
                             campo
-                            acepta máximo 50 caractéres</label>
+                            acepta máximo 100 caractéres</label>
                     </div>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label class="arial fw-bold color-primary-900 mb-1" for="last_name">Apelidos</label>
                     <input class="form-control" type="text" id="last_name" name="last_name" [(ngModel)]="user.last_name"
-                        placeholder="Escriba sus apellidos" #last_name="ngModel" required maxlength="50">
+                        placeholder="Escriba sus apellidos" #last_name="ngModel" required maxlength="200">
                     <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
                         <label class="text-error" *ngIf="last_name.errors && last_name.errors['required']"
                             class="error">Este
                             campo es
                             requerido.</label>
-                        <label class="text-error" *ngIf="name.errors && name.errors['maxlength']" class="error">Este
+                        <label class="text-error" *ngIf="last_name.errors && last_name.errors['maxlength']"
+                            class="error">Este
                             campo
-                            acepta máximo 50 caractéres</label>
+                            acepta máximo 200 caractéres</label>
                     </div>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label class="arial fw-bold color-primary-900 mb-1" for="email">Correo electrónico</label>
                     <input class="form-control" type="email" id="email" name="email" [(ngModel)]="user.email"
-                        placeholder="Escriba su correo electrónico" #email="ngModel" required maxlength="50" disabled>
+                        placeholder="Escriba su correo electrónico" #email="ngModel" required maxlength="255" disabled>
                     <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)">
                         <label class="text-error" *ngIf="email.errors && email.errors['required']" class="error">Este
                             campo es
@@ -57,16 +58,22 @@
                     <label class="arial fw-bold color-primary-900 mb-1" for="password">Contraseña</label>
                     <input class="form-control" type="password" id="password" name="password"
                         [(ngModel)]="user.password" placeholder="Escriba su contraseña" #password="ngModel" required
-                        maxlength="50">
+                        minlength="8" maxlength="255">
                     <div *ngIf="password.invalid && (password.dirty || password.touched)">
                         <label class="text-error" *ngIf="password.errors && password.errors['required']"
                             class="error">Este
                             campo es
                             requerido.</label>
+
+                        <label class="text-error" *ngIf="password.errors && password.errors['minlength']"
+                            class="error">Este
+                            campo
+                            acepta mínimo 8 caractéres</label>
+
                         <label class="text-error" *ngIf="password.errors && password.errors['maxlength']"
                             class="error">Este
                             campo
-                            acepta máximo 50 caractéres</label>
+                            acepta máximo 255 caractéres</label>
                     </div>
                 </div>
             </div>
