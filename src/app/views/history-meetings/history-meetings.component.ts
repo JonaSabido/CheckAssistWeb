@@ -58,6 +58,7 @@ export class HistoryMeetingsComponent {
     this.showFilters = !this.showFilters
     if (!this.showFilters) {
       this.filters = {}
+      this.filters.id_user = this.authUser.id
       this.reload()
     }
   }

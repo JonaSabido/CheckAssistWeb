@@ -1,0 +1,66 @@
+<h4 mat-dialog-title class="color-secondary jakarta fs-5 border-bottom"> Visualizando la asistencia de
+    {{data.meeting_user?.user?.name}} {{data.meeting_user?.user?.last_name}}</h4>
+
+
+<div mat-dialog-content class="container ">
+    <div class="row">
+        <div class="col-md-6 text-center mt-5">
+
+            <h5 class="arial fw-bold color-primary-900 fs-5 jakarta">Datos de la entrada</h5>
+            <div class="d-flex justify-content-center">
+                <div class="card mt-4 w-75 ">
+                    <div class="card-header pb-0 bg-primary-900">
+                        <h6 class="text-white fs-6 arial fw-bold ">Hora registrada </h6>
+                    </div>
+                    <div class="card-body pb-0">
+                        <p class="color-secondary fs-6">{{data.start_date.slice(11, 16)}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="card mt-4 w-75 ">
+                    <div class="card-header pb-0 bg-primary-900">
+                        <h6 class="text-white fs-6 arial fw-bold">Imagen capturada </h6>
+                    </div>
+                    <div class="card-body ">
+                        <img src="{{data.start_image}}" class="img-fluid rounded mat-elevation-z3">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-center p-0 d-flex mt-5">
+            <div class="d-none d-md-block h-100 border-start border-end" style="width: 1px;"></div>
+            <div>
+                <h5 class="arial fw-bold color-primary-900 fs-5 jakarta">Datos de la salida</h5>
+                <div class="d-flex justify-content-center">
+                    <div class="card mt-4 w-75 ">
+                        <div class="card-header pb-0 bg-primary-900">
+                            <h6 class="text-white fs-6 arial fw-bold">Hora registrada </h6>
+                        </div>
+                        <div class="card-body pb-0">
+                            <p class="color-secondary fs-6">{{data.end_date.slice(11, 16)}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="card mt-4 w-75 ">
+                        <div class="card-header pb-0 bg-primary-900">
+                            <h6 class="text-white fs-6 arial fw-bold">Imagen capturada </h6>
+                        </div>
+                        <div class="card-body ">
+                            <img src="{{data.end_image}}" class="img-fluid rounded mat-elevation-z3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div mat-dialog-actions align="center" class="d-flex align-items-center border-top">
+    <button type="button" class="button-return m-1 d-flex align-items-center" (click)="closeDialog()">
+        <span class="material-symbols-outlined fs-5 me-1">
+            arrow_back
+        </span>Volver</button>
+</div>

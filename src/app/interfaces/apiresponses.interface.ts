@@ -9,3 +9,7 @@ export interface OnlyEntity<T> {
     data: T
     message: string
 }
+
+export interface Exists {
+    exists: boolean
+}

@@ -36,43 +36,107 @@
 
 <div class="card p-4 mt-4" style="z-index: 1;">
     <div class="card-body">
-        <div class="container">
-            <div class="row ">
-                <div class="col-lg-8 col-sm-12">
-                    <div class="d-block d-md-flex align-items-center">
-                        <a [routerLink]="''" class="color-primary-900 arial fs-6 fw-bold text-decoration-none me-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 col-sm-12 ">
+                    <div class="d-block d-md-flex align-items-center ">
+                        <a [ngClass]="{'color-primary-900' : typeView == 'registers', 'color-secondary' : typeView == 'checks'}"
+                            class="arial fs-6 fw-bold text-decoration-none clickeable me-2"
+                            (click)="switchView('registers')">
                             Usuarios registrados</a>
                         <br>
-                        <a [routerLink]="''" class="color-secondary arial fs-6 fw-bold text-decoration-none">
+                        <a [ngClass]="{'color-primary-900' : typeView == 'checks', 'color-secondary' : typeView == 'registers'}"
+                            class="arial fs-6 fw-bold text-decoration-none clickeable" (click)="switchView('checks')">
                             Lista de asistencia</a>
                     </div>
                     <!-- <form class="filters mt-2 d-md-flex">
                         <input type="text" class="form form-filter w-100" placeholder="Busqueda por nombre">
                         <button type="submit" class="button-search"> Buscar </button>
                     </form> -->
-                    <div class="table-responsive mt-3">
-                        <table class="table table-responsive table-hover table-bordered"
-                            *ngIf="registers.length else noDataRegister">
-                            <thead>
-                                <tr class="">
-                                    <th scope="col" class="center-item-table">Nombres</th>
-                                    <th scope="col" class="center-item-table">Apellidos</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let row of registers">
-                                    <td class="center-item-table">{{row.user?.name}}</td>
-                                    <td class="center-item-table">{{row.user?.last_name}}</td>
+                    <div *ngIf="typeView=='registers' else checks">
+                        <div class="responsive mat-elevation-z3 mt-4" *ngIf="registers.length else noDataRegister">
+                            <table mat-table [dataSource]="registers" class="my-table">
+                                <ng-container matColumnDef="user">
+                                    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.user?.name}}
+                                        {{element.user?.last_name}} </td>
+                                </ng-container>
 
-                                </tr>
+                                <ng-container matColumnDef="createdAt">
+                                    <th mat-header-cell *matHeaderCellDef> Fecha de registro </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.createdAt.slice(0,10)}} </td>
+                                </ng-container>
 
-                            </tbody>
-                        </table>
+                                <ng-container matColumnDef="options">
+                                    <th mat-header-cell *matHeaderCellDef class="text-center"> Opciones </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex justify-content-center">
+                                            <a class="btn text-danger" title="Eliminar a este usuario del evento">
+                                                <span class="material-symbols-outlined"
+                                                    (click)="deleteMeetingUser(element)">
+                                                    delete
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                            </table>
+                        </div>
                         <ng-template #noDataRegister>
-                            <p class="text-center mt-5">Sin usuarios registrados</p>
+                            <p class="text-center mt-5 arial">Sin usuarios registrados</p>
                         </ng-template>
-
                     </div>
+
+                    <ng-template #checks>
+                        <div class="responsive mat-elevation-z3 mt-4" *ngIf="checkUsers.length else noDataCheck">
+                            <table mat-table [dataSource]="checkUsers" class="my-table">
+                                <ng-container matColumnDef="user">
+                                    <th mat-header-cell *matHeaderCellDef> Usuario</th>
+                                    <td mat-cell *matCellDef="let element"> {{element.meeting_user.user?.name}}
+                                        {{element.meeting_user?.user?.last_name}} </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="start_date">
+                                    <th mat-header-cell *matHeaderCellDef> Hora de entrada </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.start_date.slice(11, 16)}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="end_date">
+                                    <th mat-header-cell *matHeaderCellDef> Hora de salida </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.end_date.slice(11, 16)}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="status">
+                                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="options">
+                                    <th mat-header-cell *matHeaderCellDef class="text-center"> Opciones </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex justify-content-center">
+                                            <a class="btn text-primary" title="Ver detalles de la asistencia">
+                                                <span class="material-symbols-outlined"
+                                                    (click)="openDialogCheck(element)">
+                                                    visibility
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="columnsChecks"></tr>
+                                <tr mat-row *matRowDef="let row; columns: columnsChecks;"></tr>
+                            </table>
+                        </div>
+                        <ng-template #noDataCheck>
+                            <p class="text-center mt-5 arial">Sin asistencias</p>
+                        </ng-template>
+                    </ng-template>
                 </div>
                 <div class="col-lg-4 d-none d-lg-block">
                     <img class="img-fluid" src="assets/images/conceptual-assist.png">

@@ -62,7 +62,8 @@
                             <label class="arial fw-bold color-primary-900 mb-1" for="email">Correo</label>
                             <input class="form-control" type="email" id="email" name="email"
                                 [(ngModel)]="data.model.email" placeholder="Escribe el correo" #email="ngModel" required
-                                maxlength="255" [disabled]="data.type == 'edit'">
+                                maxlength="255" emailUniqueValidator [ngModelOptions]="{updateOn: 'blur'}"
+                                [disabled]="data.type == 'edit'">
                             <div *ngIf="email.invalid && (email.dirty || email.touched)">
                                 <label class="text-error" *ngIf="email.errors && email.errors['required']"
                                     class="error">Este
@@ -72,6 +73,8 @@
                                     class="error">Este
                                     campo
                                     acepta máximo 255 caractéres</label>
+                                <label class="text-error" *ngIf="email.errors && email.errors['emailUniqueValidator']"
+                                    class="error">Ya existe un usuario con este correo</label>
                             </div>
                         </div>
 
@@ -118,8 +121,7 @@
             <span class="material-symbols-outlined fs-5 me-1">
                 arrow_back
             </span>Volver</button>
-        <button class="button-save m-1 d-flex align-items-center" type="submit"
-            [disabled]="meetingForm.invalid">
+        <button class="button-save m-1 d-flex align-items-center" type="submit" [disabled]="meetingForm.invalid">
             <span class="material-symbols-outlined fs-5 m-1">
                 save
             </span>Guardar</button>

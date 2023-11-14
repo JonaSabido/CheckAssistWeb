@@ -12,14 +12,14 @@
 
 
                         <input type="text" class="form-control mt-4" placeholder="Escriba su nombre" id="name"
-                            name="name" [(ngModel)]="dataRegister.name" #name="ngModel" required maxlength="300">
+                            name="name" [(ngModel)]="dataRegister.name" #name="ngModel" required maxlength="100">
                         <div *ngIf="name.invalid && (name.dirty || name.touched)">
                             <label class="text-error" *ngIf="name.errors && name.errors['required']" class="error">Este
                                 campo es
                                 requerido.</label>
                             <label class="text-error" *ngIf="name.errors && name.errors['maxlength']" class="error">Este
                                 campo
-                                acepta máximo 300 caractéres</label>
+                                acepta máximo 100 caractéres</label>
                         </div>
 
 
@@ -39,7 +39,8 @@
 
 
                         <input type="email" class="form-control mt-4" placeholder="Escriba su correo" id="email"
-                            name="email" [(ngModel)]="dataRegister.email" #email="ngModel" required maxlength="300">
+                            name="email" [(ngModel)]="dataRegister.email" #email="ngModel" required emailUniqueValidator
+                            [ngModelOptions]="{updateOn: 'blur'}" maxlength="300">
                         <div *ngIf="email.invalid && (email.dirty || email.touched)">
                             <label class="text-error" *ngIf="email.errors && email.errors['required']"
                                 class="error">Este
@@ -49,17 +50,23 @@
                                 class="error">Este
                                 campo
                                 acepta máximo 300 caractéres</label>
+                            <label class="text-error" *ngIf="email.errors && email.errors['emailUniqueValidator']"
+                                class="error">Ya existe un usuario con este correo</label>
                         </div>
 
 
                         <input type="password" class="form-control mt-4" placeholder="Escriba su contraseña"
                             id="password" name="password" [(ngModel)]="dataRegister.password" #password="ngModel"
-                            required maxlength="300">
+                            required minlength="8" maxlength="300">
                         <div *ngIf="password.invalid && (password.dirty || password.touched)">
                             <label class="text-error" *ngIf="password.errors && password.errors['required']"
                                 class="error">Este
                                 campo es
                                 requerido.</label>
+                            <label class="text-error" *ngIf="password.errors && password.errors['minlength']"
+                                class="error">Este
+                                campo
+                                acepta mínimo 8 caractéres</label>
                             <label class="text-error" *ngIf="password.errors && password.errors['maxlength']"
                                 class="error">Este
                                 campo

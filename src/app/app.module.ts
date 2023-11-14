@@ -27,7 +27,9 @@ import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component
 import { MatTableModule } from '@angular/material/table';
 import { DateMeetingValidatorDirective } from './validations/date-meeting-validator.directive';
 import { EndHourValidatorDirective } from './validations/end-hour-validator.directive';
-import { StartHourValidatorDirective } from './validations/start-hour-validator.directive'
+import { StartHourValidatorDirective } from './validations/start-hour-validator.directive';
+import { EmailUniqueValidatorDirective } from './validations/email-unique-validator.directive';
+import { CheckDialogComponent } from './dialogs/check-dialog/check-dialog.component'
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { StartHourValidatorDirective } from './validations/start-hour-validator.
     DateMeetingValidatorDirective,
     EndHourValidatorDirective,
     StartHourValidatorDirective,
+    EmailUniqueValidatorDirective,
+    CheckDialogComponent,
   ],
   imports: [
     BrowserModule,

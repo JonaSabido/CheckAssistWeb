@@ -24,11 +24,11 @@ export class EndHourValidatorDirective implements Validator {
     }
 
     if (value < this.startHour) {
-      return { 'endHourValidator': { 'message': 'La hora de salida no puede ser antes a la hora de entarda' } }
+      return { 'endHourValidator': { 'message': 'La hora de salida no puede ser antes a la hora de entrada' } }
     }
 
     if (value == this.startHour) {
-      return { 'endHourValidator': { 'message': 'La hora de salida no puede ser igual a la hora de entarda' } }
+      return { 'endHourValidator': { 'message': 'La hora de salida no puede ser igual a la hora de entrada' } }
     }
 
     return {};
