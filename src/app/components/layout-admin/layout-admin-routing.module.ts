@@ -6,6 +6,10 @@ import { HistoryMeetingsComponent } from 'src/app/views/history-meetings/history
 import { AccountComponent } from 'src/app/views/account/account.component';
 import { DetailMeetingComponent } from 'src/app/views/detail-meeting/detail-meeting.component';
 import { UsersComponent } from 'src/app/views/users/users.component';
+import { AdminGuard } from 'src/app/helpers/guards/admin-guard';
+import { OrganizerGuard } from 'src/app/helpers/guards/organizer-guard';
+import { AnyGuard } from 'src/app/helpers/guards/any-guard';
+import { MeetingsComponent } from 'src/app/views/meetings/meetings.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,23 +17,36 @@ const routes: Routes = [{
   children: [
     {
       path: 'my-meetings',
-      component: MyMeetingsComponent
+      component: MyMeetingsComponent,
+      canActivate: [OrganizerGuard],
+
     },
     {
       path: 'history-meetings',
-      component: HistoryMeetingsComponent
+      component: HistoryMeetingsComponent,
+      canActivate: [OrganizerGuard],
+
     },
     {
       path: 'account',
-      component: AccountComponent
+      component: AccountComponent,
+      canActivate: [AnyGuard],
+
     },
     {
       path: 'details/:id',
-      component: DetailMeetingComponent
+      component: DetailMeetingComponent,
+      canActivate: [AnyGuard],
+    },
+    {
+      path: 'meetings',
+      component: MeetingsComponent,
+      canActivate: [AdminGuard],
     },
     {
       path: 'users',
-      component: UsersComponent
+      component: UsersComponent,
+      canActivate: [AdminGuard],
     }
   ]
 }];

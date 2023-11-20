@@ -6,12 +6,6 @@ import { List, OnlyEntity } from 'src/app/interfaces/apiresponses.interface';
 
 export abstract class ApiService<T>  {
 
-    token = localStorage.getItem("token_deleite_app") || ''
-    options = {
-        headers: {
-            "Authorization": "Bearer " + this.token
-        }
-    }
 
     private readonly api: string = API_URL;
     constructor(protected http: HttpClient) {
@@ -71,7 +65,7 @@ export abstract class ApiService<T>  {
      * @return an `Observable` of the saved entity of type `<T>`
      */
     public store(e: T): Observable<OnlyEntity<T>> {
-        return this.http.post<OnlyEntity<T>>(this.uri, e, this.options);
+        return this.http.post<OnlyEntity<T>>(this.uri, e);
     }
 
 
@@ -94,7 +88,7 @@ export abstract class ApiService<T>  {
      * @return an `Observable` of the updated entity of type `<T>`
      */
     public update(id: number, e: T): Observable<OnlyEntity<T>> {
-        return this.http.put<OnlyEntity<T>>(`${this.uri}/${id}`, e, this.options);
+        return this.http.put<OnlyEntity<T>>(`${this.uri}/${id}`, e);
     }
     /**
      * Calls the default `DELETE http://myserver.com/api/<root>/{id}` to delete an existing entity of
@@ -103,7 +97,7 @@ export abstract class ApiService<T>  {
      * @return an `Observable` of the saved entity of type `<T>`
      */
     public destroy(id: number): Observable<OnlyEntity<T>> {
-        return this.http.delete<OnlyEntity<T>>(`${this.uri}/${id}`, this.options);
+        return this.http.delete<OnlyEntity<T>>(`${this.uri}/${id}`);
     }
 }
 

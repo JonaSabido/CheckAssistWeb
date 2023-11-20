@@ -6,6 +6,7 @@ import { API_URL } from '../consts/urls';
 import { User } from '../interfaces/user.interface';
 import { OnlyEntity } from '../interfaces/apiresponses.interface';
 import { JwtService } from './jwt.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,8 @@ export class AuthService {
 
     constructor(
         private http: HttpClient,
-        private jwtService: JwtService
+        private jwtService: JwtService,
+        
     ) {
     }
 
@@ -37,4 +39,5 @@ export class AuthService {
             }
         });
     }
+
 }

@@ -54,7 +54,6 @@ export class MyMeetingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.authUser = this.jwtService.getData(this.jwtService.getToken())
-    this.filters.id_user = this.authUser.id
     this.entity.id_user = this.authUser.id
     this.reload()
   }

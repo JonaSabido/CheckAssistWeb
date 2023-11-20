@@ -57,7 +57,7 @@ export class DetailMeetingComponent {
     private route: ActivatedRoute,
     private service: MeetingService,
     private serviceMeetingUser: MeetingUserService,
-    private ServiceCheckUser: CheckUserService,
+    private serviceCheckUser: CheckUserService,
     private dialog: MatDialog,
     public router: Router
 
@@ -73,9 +73,16 @@ export class DetailMeetingComponent {
   }
 
   getData() {
-    this.service.single(this.id).subscribe(response => {
-      this.meeting = response.data
+    this.service.single(this.id).subscribe({
+      next: (response) => {
+        this.meeting = response.data
+      },
+      error: (err) => {
+        if (err.status == 403) {
+          this.router.navigate(['/'], { relativeTo: this.route });
 
+        }
+      }
     })
     this.getMeetingUsers()
     this.getCheckUsers()
@@ -84,7 +91,7 @@ export class DetailMeetingComponent {
 
 
   getMeetingUsers() {
-    this.serviceMeetingUser.list({ id_meeting: this.id }).subscribe(
+    this.serviceMeetingUser.getByMeeting(this.id).subscribe(
       {
         next: (response) => {
           this.registers = response.data
@@ -97,7 +104,7 @@ export class DetailMeetingComponent {
   }
 
   getCheckUsers() {
-    this.ServiceCheckUser.list().subscribe(
+    this.serviceCheckUser.getByMeeting(this.id).subscribe(
       {
         next: (response) => {
           this.checkUsers = response.data

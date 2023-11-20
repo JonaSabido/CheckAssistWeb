@@ -35,7 +35,12 @@ export class LoginComponent {
           const authUser = this.jwtService.getData(response.token)
           if (authUser.id_profile == 2 || authUser.id_profile == 1) {
             localStorage.setItem('token_checkassist_app', response.token)
-            this.router.navigate(['/my-meetings'], { relativeTo: this.route });
+            if (authUser.id_profile == 2) {
+              this.router.navigate(['/my-meetings'], { relativeTo: this.route });
+            }
+            else if (authUser.id_profile == 1) {
+              this.router.navigate(['/meetings'], { relativeTo: this.route });
+            }
           }
           else {
             this.showError = true

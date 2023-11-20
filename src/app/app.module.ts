@@ -20,7 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { AccountComponent } from './views/account/account.component';
 import { DetailMeetingComponent } from './views/detail-meeting/detail-meeting.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UsersComponent } from './views/users/users.component';
 import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component';
@@ -30,6 +30,9 @@ import { EndHourValidatorDirective } from './validations/end-hour-validator.dire
 import { StartHourValidatorDirective } from './validations/start-hour-validator.directive';
 import { EmailUniqueValidatorDirective } from './validations/email-unique-validator.directive';
 import { CheckDialogComponent } from './dialogs/check-dialog/check-dialog.component'
+import { AuthInterceptor } from './helpers/auth.interceptor';
+import { MeetingsComponent } from './views/meetings/meetings.component';
+import { LocationDialogComponent } from './dialogs/location-dialog/location-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,8 @@ import { CheckDialogComponent } from './dialogs/check-dialog/check-dialog.compon
     StartHourValidatorDirective,
     EmailUniqueValidatorDirective,
     CheckDialogComponent,
+    MeetingsComponent,
+    LocationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +70,9 @@ import { CheckDialogComponent } from './dialogs/check-dialog/check-dialog.compon
       config: {}
     })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

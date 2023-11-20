@@ -1,10 +1,30 @@
-.card-meeting{
-    cursor: pointer;
-    border-radius: 10px;
-    transition: 200ms;
+$blue-50: #f6f6ff;
+$blue-80: #f0f0ff;
+$blue-100: #e4e4ff;
+$blue-200: #cdceff;
+$blue-300: #a7a6ff;
+$blue-400: #7c73ff;
+$blue-500: #533bff;
+$blue-600: #3e14ff;
+$blue-700: #2b00ff;
+$blue-800: #2501d6;
+$blue-900: #2003af;
+$blue-950: #0f0077;
+$black-blue: #282437;
 
-    &:hover{
+.card-meeting {
+    cursor: pointer;
+    transition: 200ms;
+    box-shadow: 0px 5px 5px 2px $blue-80;
+    border: 1px $blue-200 solid;
+
+
+    &:hover {
         scale: 105%;
         transition: 200ms;
+        border: 1px $blue-300 solid;
+        box-shadow: 0px 5px 5px 2px $blue-100;
+
+
     }
 }

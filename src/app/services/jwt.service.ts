@@ -14,8 +14,8 @@ export class JwtService {
         private helper: JwtHelperService
     ) { }
 
-    public getData(token: string): AuthUser {
-        const payload = this.helper.decodeToken(token)
+    public getData(token?: string): AuthUser {
+        const payload = this.helper.decodeToken(token ?? this.getToken())
 
         const authUser: AuthUser = {
             id: payload['authUser'].id,

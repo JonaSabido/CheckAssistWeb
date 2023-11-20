@@ -9,11 +9,11 @@ import { JwtService } from 'src/app/services/jwt.service';
 import { MeetingService } from 'src/app/services/meeting.service';
 
 @Component({
-  selector: 'app-history-meetings',
-  templateUrl: './history-meetings.component.html',
-  styleUrls: ['./history-meetings.component.scss']
+  selector: 'app-meetings',
+  templateUrl: './meetings.component.html',
+  styleUrls: ['./meetings.component.scss']
 })
-export class HistoryMeetingsComponent {
+export class MeetingsComponent {
 
   entities: Meeting[] = []
 
@@ -21,9 +21,7 @@ export class HistoryMeetingsComponent {
 
   showFilters: boolean = false;
 
-  columns: string[] = ['name', 'date_meeting', 'start_hour', 'end_hour', 'options'];
-
- 
+  columns: string[] = ['name', 'user', 'date_meeting', 'options'];
 
   constructor(
     private service: MeetingService,
@@ -32,12 +30,11 @@ export class HistoryMeetingsComponent {
   }
 
   ngOnInit(): void {
-
     this.reload()
   }
 
   reload() {
-    this.service.history(this.filters).subscribe({
+    this.service.list(this.filters).subscribe({
       next: (response) => {
         this.entities = response.data
       },
