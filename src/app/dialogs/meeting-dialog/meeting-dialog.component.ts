@@ -70,7 +70,7 @@ export class MeetingDialogComponent {
 
   }
 
-  openDialogLocaltion() {
+  openDialogLocation() {
     const dialogData: DataDialog<Meeting> = {
       type: this.data.type,
       model: this.data.model
@@ -79,6 +79,7 @@ export class MeetingDialogComponent {
     this.matDialog.open(LocationDialogComponent, {
       data: dialogData,
       width: '100%',
+      
       panelClass: '',
       autoFocus: false
 

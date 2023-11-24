@@ -26,11 +26,13 @@
                 <input type="text" class="form form-filter w-100" placeholder="Busqueda por nombre"
                     [(ngModel)]="filters.name" name="filter_name" id="filter_name">
             </div>
-            <!-- <div class="w-100 mt-2">
-                <label for="filter_date_meeting" class="label-filter">Despues de la fecha</label>
+            <div class="w-100 mt-2">
+                <label for="filter_date_meeting" class="label-filter d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-6">calendar_month</span>
+                    Fecha</label>
                 <input type="date" class="form form-filter w-100" [(ngModel)]="filters.date_meeting" name="filter_date"
                     id="filter_date">
-            </div> -->
+            </div>
             <div class="w-100 mt-2">
                 <label for="filter_start_hour" class="label-filter d-flex align-items-center">
                     <span class="material-symbols-outlined fs-6">timer</span>
@@ -41,7 +43,7 @@
             <div class="w-100 mt-2">
                 <label for="filter_end_hour" class="label-filter d-flex align-items-center">
                     <span class="material-symbols-outlined fs-6">timer</span>
-                    Hora de finalización</label>
+                    Hora de salida</label>
                 <input type="time" class="form form-filter w-100" [(ngModel)]="filters.end_hour" name="filter_end_hour"
                     id="filter_end_hour">
             </div>
@@ -76,6 +78,17 @@
                                     ¡Mañana!
                                 </p>
                             </div>
+                            <div class="d-flex mt-2 ">
+                                <div class="d-flex justify-content-star align-items-center rounded bg-primary-80 ps-0 pe-2"
+                                    style="width: auto;">
+                                    <span
+                                        class="color-primary-500 material-symbols-outlined fs-5 fw-bold me-1 ">encrypted</span>
+                                    <p class="color-primary-900 fw-bold arial fs-6 m-0">
+                                        {{row.code_meeting}}
+                                    </p>
+                                </div>
+
+                            </div>
                             <div class="d-flex mt-2">
                                 <span
                                     class="material-symbols-outlined fs-5 color-primary-500 fw-bold me-1">calendar_month</span>
@@ -83,8 +96,7 @@
                                     {{row.date_meeting}}
                                 </p>
                             </div>
-
-                            <div class="d-flex">
+                            <div class="d-flex ">
                                 <span class="material-symbols-outlined fs-5 color-primary-500 fw-bold me-1">timer</span>
                                 <p class="color-secondary fw-bold arial fs-6">
                                     {{row.start_hour}}

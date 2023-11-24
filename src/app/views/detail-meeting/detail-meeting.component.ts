@@ -5,6 +5,7 @@ import { AlertDeleteError, AlertDeleteSuccess } from 'shared/utils/alerts';
 import { Confirm } from 'shared/utils/alerts-config';
 import { TODAY } from 'shared/utils/constants';
 import { CheckDialogComponent } from 'src/app/dialogs/check-dialog/check-dialog.component';
+import { LocationDialogComponent } from 'src/app/dialogs/location-dialog/location-dialog.component';
 import { MeetingDialogComponent } from 'src/app/dialogs/meeting-dialog/meeting-dialog.component';
 import { CheckUser } from 'src/app/interfaces/checkuser.interface';
 import { DataDialog } from 'src/app/interfaces/data-dialog.interface';
@@ -143,6 +144,22 @@ export class DetailMeetingComponent {
       autoFocus: false
     }).afterClosed().subscribe(value => {
 
+    })
+  }
+
+  openDialogLocation() {
+    const dialogData: DataDialog<Meeting> = {
+      type: 'only-view',
+      model: this.meeting
+    }
+
+    this.dialog.open(LocationDialogComponent, {
+      data: dialogData,
+      width: '100%',
+      panelClass: '',
+      autoFocus: false
+
+    }).afterClosed().subscribe(value => {
     })
   }
 

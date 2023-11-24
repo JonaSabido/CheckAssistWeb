@@ -14,7 +14,7 @@ $black-blue: #282437;
 
 .nav-bar {
     top: 0;
-    padding: 0px 120px 0px 120px;
+    padding: 0px 80px 0px 120px;
     height: 80px;
     width: 100%;
     border-bottom: 1px solid #e7e7e7;
@@ -26,19 +26,30 @@ $black-blue: #282437;
     padding: 10px 40px 0px 270px;
 }
 
-.form-search {
+.input-search {
     border-radius: 5px;
     height: 40px;
-    background-color: $blue-50;
-    border: 2px $blue-100 solid;
-    padding: 10px;
-    transition: 100ms;
+    background-color: transparent;
+    border: 1px $blue-300 solid;
+    padding: 15px;
+    transition: 200ms;
 
     &:focus {
-        border: 2px $blue-200 solid;
+        border: 1px $blue-500 solid;
         outline: none;
-        transition: 100ms;
-
+        box-shadow: 0px 5px 5px 1px $blue-80;
+        transition: 200ms;
     }
 
+}
+
+.avatar {
+    border-radius: 50%;
+    transition: 200ms;
+
+    &:hover {
+        box-shadow: 0px 5px 5px 1px $blue-100;
+        transition: 200ms;
+
+    }
 }

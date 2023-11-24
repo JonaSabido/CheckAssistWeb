@@ -26,7 +26,8 @@ export class MyMeetingsComponent implements OnInit {
     start_hour: '',
     end_hour: '',
     latitude: 0,
-    longitude: 0
+    longitude: 0,
+    selectedLocation: false,
   }
 
   entities: Meeting[] = []

@@ -11,5 +11,6 @@ export interface Meeting extends Model {
     date_meeting: string,
     start_hour: string,
     end_hour: string,
-    user?: User
+    user?: User,
+    selectedLocation?: boolean,
 }

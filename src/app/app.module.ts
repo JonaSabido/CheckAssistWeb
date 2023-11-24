@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { HeadbarComponent } from './components/headbar/headbar.component';
-import { FooterbarComponent } from './components/footerbar/footerbar.component';
 import { LayoutAdminRoutingModule } from './components/layout-admin/layout-admin-routing.module';
 import { LayoutAdminModule } from './components/layout-admin/layout-admin.module';
 import { MyMeetingsComponent } from './views/my-meetings/my-meetings.component';
@@ -33,6 +29,7 @@ import { CheckDialogComponent } from './dialogs/check-dialog/check-dialog.compon
 import { AuthInterceptor } from './helpers/auth.interceptor';
 import { MeetingsComponent } from './views/meetings/meetings.component';
 import { LocationDialogComponent } from './dialogs/location-dialog/location-dialog.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -66,6 +63,7 @@ import { LocationDialogComponent } from './dialogs/location-dialog/location-dial
     FormsModule,
     HttpClientModule,
     MatTableModule,
+    GoogleMapsModule,
     JwtModule.forRoot({
       config: {}
     })

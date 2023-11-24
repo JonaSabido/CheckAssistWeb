@@ -21,9 +21,17 @@ $black-blue: #282437;
 }
 
 #navbar_banner {
-    background-size: 45%;
+    background-size: 50%;
     background-position-x: 115%;
-    background-position-y: -100px;
+    background-position-y: -120px;
+}
+
+@media only screen and (max-width: 767px) {
+    #navbar_banner {
+        background-size: 90%;
+        background-position-x: 210%;
+        background-position-y: -100px;
+    }
 }
 
 #services_download {

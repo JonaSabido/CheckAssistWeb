@@ -3,20 +3,45 @@
         <app-navbar></app-navbar>
         <header class="container pt-5">
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <img class="img-fluid" src="assets/images/conceptual-banner.jpg">
+                <div class="d-none d-md-block col-md-6">
+                    <img class="img-fluid" src="assets/images/conceptual-banner-2.png">
                 </div>
                 <div class="col-md-6">
-                    <h1 class="fs-5 montserrat color-secondary"> PASE LISTA </h1>
-                    <h2 class="fs-1 jakarta color-secondary mb-4">¡Ubicate en tu evento! <br> Registrate y confirma <br>
-                        con
-                        presición.</h2>
-                    <a [routerLink]="'home'" class="fill-button-primary-500">Descarga la aplicación</a>
+                    <div class="d-none d-md-block">
+                        <h1 class="fs-4 montserrat color-secondary"> CheckAssist </h1>
+                        <h2 class="fs-1 jakarta color-secondary mb-4"><span class="color-primary-500">¡Registrate
+                            </span>en tu evento! <br> <span class="color-primary-500">Ubicate</span> y confirma
+                            <br>
+                            tu
+                            <span class="color-primary-500">asistencia.</span>
+                        </h2>
+                        <button [routerLink]="'home'" class="fill-button-primary-500">
+                            <span class="material-symbols-outlined fs-6">
+                                download
+                            </span>
+                            Descarga la aplicación
+                        </button>
+                    </div>
+                    <div class="d-block d-md-none text-center mt-5 mb-5 pt-5 pb-5">
+                        <h1 class="fs-3 montserrat color-secondary mb-3"> CheckAssist </h1>
+                        <h2 class="display-1 jakarta color-secondary mb-4"> <span class="color-primary-500">¡Registrate
+                            </span>en tu evento! <br> <span class="color-primary-500">Ubicate</span> y confirma
+                            <br>
+                            tu
+                            <span class="color-primary-500">asistencia.</span>
+                        </h2>
+                        <button [routerLink]="'home'" class="fill-button-primary-500">
+                            <span class="material-symbols-outlined fs-6">
+                                download
+                            </span>
+                            Descarga la aplicación
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
     </div>
-    <div class="container mt-3" id="benefits">
+    <div class="container mt-5" #benefits id="benefits">
         <div class="row">
             <div class="col-md-3 mt-5">
                 <div class="d-flex align-items-center card-primary-50 p-4 pt-5">
@@ -60,29 +85,29 @@
             </div>
         </div>
     </div>
-
-    <div class="container" id="use">
+    <div #use></div>
+    <div class="container p-4" id="use">
         <div class="row align-items-center">
-            <div class="col-md-6">
+            <div class="col-md-7 text-center">
                 <h2 class="jakarta color-secondary fs-1"> 1. Registrate como organizador <br> y crea tu evento</h2>
                 <p class="mt-2 fs-5 color-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
                     alias
                     ullam
                     dicta reiciendis velit sint sunt voluptatum non dolores ut possimus molestiae dolor</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <img class="img-fluid" src="assets/images/conceptual-step1.png">
             </div>
         </div>
     </div>
 
     <div class="bg-primary-80">
-        <div class="container">
+        <div class="container p-4">
             <div class="row align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <img class="img-fluid" src="assets/images/conceptual-step2.png">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7 text-center">
                     <h2 class="jakarta color-secondary fs-1"> 2. Invita a tus participantes<br> a acceder desde la app
                     </h2>
                     <p class="mt-2 fs-5 color-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
@@ -94,9 +119,9 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container p-4">
         <div class="row align-items-center">
-            <div class="col-md-6">
+            <div class="col-md-7 text-center">
                 <h2 class="jakarta color-secondary fs-1"> 3. Tus participantes <br> confirmaran su asistencia <br> con
                     su
                     geolocalización</h2>
@@ -105,19 +130,19 @@
                     ullam
                     dicta reiciendis velit sint sunt voluptatum non dolores ut possimus molestiae dolor</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <img class="img-fluid" src="assets/images/conceptual-step3.png">
             </div>
         </div>
     </div>
 
     <div class="bg-primary-80">
-        <div class="container">
+        <div class="container p-4">
             <div class="row align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <img class="img-fluid" src="assets/images/conceptual-step4.png">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7 text-center">
                     <h2 class="jakarta color-secondary fs-1"> 4. Monitorea las asistencias <br> desde tu panel de
                         organizador</h2>
                     <p class="mt-2 fs-5 color-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
@@ -128,7 +153,7 @@
             </div>
         </div>
     </div>
-
+    <div #about></div>
     <div class="container mt-5" id="about">
         <h3 class="montserrat color-secondary fs-5 text-center">
             ACERCA DE
@@ -150,7 +175,7 @@
 
         </p>
     </div>
-
+    <div #services></div>
     <div class="bg-circle" id="services_download">
         <div class="container mt-5" id="services">
             <h3 class="montserrat color-secondary fs-5 text-center">
@@ -193,10 +218,10 @@
                 <img class="img-fluid" src="assets/images/conceptual-download-2.png">
             </div>
             <div class="d-flex justify-content-center">
-                <a [routerLink]="'home'" class="fill-button-primary-500 p-3">DESCARGA YA NUESTRA APLICACIÓN <br> Y NO TE
-                    QUEDES
-                    SIN
-                    TU ASISTENCIA</a>
+                <button [routerLink]="'home'" class="fill-button-primary-500 p-3 d-flex align-items-center">
+                    <span class="material-symbols-outlined fs-4 me-2">
+                        download
+                    </span>DESCARGA YA NUESTRA APLICACIÓN </button>
 
             </div>
         </div>
@@ -210,19 +235,19 @@
                     </p>
                 </div>
                 <div class="col-6 col-md-3 mt-5">
-                    <h2 class="text-white jakarta fs-4 mb-3"> Contacto</h2>
+                    <h2 class="text-white jakarta fs-4 mb-3"> Nosotros </h2>
                     <ul class="list-style-none p-0">
                         <li class="mb-1">
-                            <a [routerLink]="''" class="footer-link ">Beneficios</a>
+                            <a (click)="scrollToBenefits()" class="footer-link">Beneficios</a>
                         </li>
                         <li class="mb-1">
-                            <a [routerLink]="''" class="footer-link ">Modo de uso</a>
+                            <a (click)="scrollToUse()" class="footer-link ">Modo de uso</a>
                         </li>
                         <li class="mb-1">
-                            <a [routerLink]="''" class="footer-link ">Acerca de</a>
+                            <a (click)="scrollToAbout()" class="footer-link ">Acerca de</a>
                         </li>
                         <li class="mb-1">
-                            <a [routerLink]="''" class="footer-link ">Servicios</a>
+                            <a (click)="scrollToServices()" class="footer-link ">Servicios</a>
                         </li>
                     </ul>
                 </div>
