@@ -22,20 +22,23 @@
                             Descarga la aplicación
                         </button>
                     </div>
-                    <div class="d-block d-md-none text-center mt-5 mb-5 pt-5 pb-5">
-                        <h1 class="fs-3 montserrat color-secondary mb-3"> CheckAssist </h1>
-                        <h2 class="display-1 jakarta color-secondary mb-4"> <span class="color-primary-500">¡Registrate
-                            </span>en tu evento! <br> <span class="color-primary-500">Ubicate</span> y confirma
-                            <br>
-                            tu
-                            <span class="color-primary-500">asistencia.</span>
-                        </h2>
-                        <button [routerLink]="'home'" class="fill-button-primary-500">
-                            <span class="material-symbols-outlined fs-6">
-                                download
-                            </span>
-                            Descarga la aplicación
-                        </button>
+                    <div class="d-flex align-items-center d-md-none text-center" style="height: 90vh;">
+                        <div>
+                            <h1 class="fs-3 montserrat color-secondary mb-3"> CheckAssist </h1>
+                            <h2 class="display-1 jakarta color-secondary mb-4"> <span
+                                    class="color-primary-500">¡Registrate
+                                </span>en tu evento! <br> <span class="color-primary-500">Ubicate</span> y confirma
+                                <br>
+                                tu
+                                <span class="color-primary-500">asistencia.</span>
+                            </h2>
+                            <button [routerLink]="'home'" class="fill-button-primary-500">
+                                <span class="material-symbols-outlined fs-6">
+                                    download
+                                </span>
+                                Descarga la aplicación
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,44 +47,22 @@
     <div class="container mt-5" #benefits id="benefits">
         <div class="row">
             <div class="col-md-3 mt-5">
-                <div class="d-flex align-items-center card-primary-50 p-4 pt-5">
-                    <article>
-                        <h3 class="montserrat fs-5 text-center color-secondary"> BENEFICIO 1</h3>
-                        <p class="text-center text-size pt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Optio
-                            error voluptatibus placeat quia maxime totam animi? Minima.</p>
-                    </article>
-                </div>
+                <card-benefit [icon]="'task_alt'" [title]="'Efectivo'" [description]="'Disfruta de una interfaz intuitiva para una gestión eficiente de los
+                        eventos y participantes.'"></card-benefit>
             </div>
             <div class="col-md-3 mt-5">
-                <div class="d-flex align-items-center card-primary-50 p-4 pt-5">
-                    <article>
-                        <h3 class="montserrat fs-5 text-center color-secondary"> BENEFICIO 2</h3>
-                        <p class="text-center text-size pt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Optio
-                            error voluptatibus placeat quia maxime totam animi? Minima.</p>
-                    </article>
-                </div>
+                <card-benefit [icon]="'thumb_up'" [title]="'Útil'"
+                    [description]="'Te brindamos herramienta prácticas y precisas, enfocadas al máximo ahorro de tiempo.'"></card-benefit>
             </div>
             <div class="col-md-3 mt-5">
-                <div class="d-flex align-items-center card-primary-50 p-4 pt-5">
-                    <article>
-                        <h3 class="montserrat fs-5 text-center color-secondary"> BENEFICIO 3</h3>
-                        <p class="text-center text-size pt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Optio
-                            error voluptatibus placeat quia maxime totam animi? Minima.</p>
-                    </article>
-                </div>
+                <card-benefit [icon]="'security'" [title]="'Seguro'" [description]="'Contamos con un alto nivel de seguridad
+                para que te
+                enfoques solo
+                en realizar tu trabajo.'"></card-benefit>
             </div>
             <div class="col-md-3 mt-5">
-                <div class="d-flex align-items-center card-primary-50 p-4 pt-5">
-                    <article>
-                        <h3 class="montserrat fs-5 text-center color-secondary"> BENEFICIO 4</h3>
-                        <p class="text-center text-size pt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Optio
-                            error voluptatibus placeat quia maxime totam animi? Minima.</p>
-                    </article>
-                </div>
+                <card-benefit [icon]="'lightbulb'" [title]="'Innovador'" [description]="'Una nueva forma de pasar lista en tus eventos,
+                evita perdidas de tiempo y de información.'"></card-benefit>
             </div>
         </div>
     </div>
@@ -186,30 +167,23 @@
             </h2>
             <div class="row">
                 <div class="col-md-6 mt-5 d-flex justify-content-end">
-                    <article class="card-service p-5 w-75 bg-white">
-                        <h3 class="montserrat fs-2 text-center color-primary-900 text-center"> CONVIERTETE EN
-                            <br> ORGANIZADOR
-                        </h3>
-                        <ul class="montserrat fs-5 color-secondary mt-5 list-style-square">
-                            <li> Caracteristica 1 </li>
-                            <li> Caracteristica 1 </li>
-                            <li> Caracteristica 1 </li>
-                            <li> Caracteristica 1 </li>
-                        </ul>
-                    </article>
+                    <card-service class="w-75" [bgClass]="'bg-white'" [title]="'CONVIERTETE EN'"
+                        [afterBr]="'ORGANIZADOR'" [descriptions]="[
+                            'Gestión intuitiva a través del panel web ',
+                            'Creación y control de acceso a tus eventos',
+                            'Lista de asistencia para tu evento',
+                            'Historial de eventos anteriores',
+                        ]"></card-service>
+
                 </div>
                 <div class="col-md-6 mt-5 d-flex justify-content-start">
-                    <article class="card-service p-5 w-75 bg-primary-80">
-                        <h3 class="montserrat fs-2 text-center color-primary-900 text-center"> CONVIERTETE EN
-                            <br> ORGANIZADOR
-                        </h3>
-                        <ul class="montserrat fs-5 color-secondary mt-5 list-style-square">
-                            <li> Caracteristica 1 </li>
-                            <li> Caracteristica 1 </li>
-                            <li> Caracteristica 1 </li>
-                            <li> Caracteristica 1 </li>
-                        </ul>
-                    </article>
+                    <card-service class="w-75" [bgClass]="'bg-primary-80'" [title]="'CONVIERTETE EN'"
+                        [afterBr]="'PARTICIPANTE'" [descriptions]="[
+                            'Interacción y registro a través de la app móvil.',
+                            'Inscripción rápida a los eventos ',
+                            'Lista de los eventos a donde tengo que asistir',
+                            'Registro de asistencia por geolocalización y foto',
+                        ]"></card-service>
                 </div>
             </div>
         </div>
