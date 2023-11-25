@@ -1,0 +1,10 @@
+<article class="card-service p-5" [ngClass]="bgClass">
+    <h3 class="montserrat fs-3 text-center color-primary-900 text-center"> {{title}}
+        <br> {{afterBr}}
+    </h3>
+    <ul class="montserrat fs-6 color-secondary mt-4 list-style-square">
+        <li class="mt-2" *ngFor="let description of descriptions">
+            {{description}}
+        </li>
+    </ul>
+</article>

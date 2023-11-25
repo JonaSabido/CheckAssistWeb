@@ -30,6 +30,8 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
 import { MeetingsComponent } from './views/meetings/meetings.component';
 import { LocationDialogComponent } from './dialogs/location-dialog/location-dialog.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { BenefitComponent } from './components/benefit/benefit.component';
+import { ServiceComponent } from './components/service/service.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     CheckDialogComponent,
     MeetingsComponent,
     LocationDialogComponent,
+    BenefitComponent,
+    ServiceComponent,
   ],
   imports: [
     BrowserModule,
