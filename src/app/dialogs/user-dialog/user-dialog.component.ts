@@ -14,6 +14,8 @@ import { AlertSaveError, AlertSaveSuccess } from 'shared/utils/alerts';
 })
 export class UserDialogComponent {
   profiles = PROFILES
+  showLoadingSave: boolean = false;
+
 
   constructor(
     private dialog: MatDialogRef<UserDialogComponent>,
@@ -21,32 +23,39 @@ export class UserDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DataDialog<User>
   ) { }
 
-  closeDialog(): void {
-    this.dialog.close(true);
+  closeDialog(reload: boolean = false): void {
+    this.dialog.close(reload);
   }
 
   ngOnInit() {
   }
 
   create() {
+    this.showLoadingSave = true
     this.service.store(this.data.model).subscribe({
       next: (response) => {
+        this.showLoadingSave = false
         AlertSaveSuccess()
-        this.closeDialog()
+        this.closeDialog(true)
       },
       error: (e) => {
+        this.showLoadingSave = false
+        AlertSaveError()
 
       }
     })
   }
 
   update() {
+    this.showLoadingSave = true
     this.service.update(this.data.model.id, this.data.model).subscribe({
       next: (response) => {
+        this.showLoadingSave = false
         AlertSaveSuccess()
-        this.closeDialog()
+        this.closeDialog(true)
       },
       error: (e) => {
+        this.showLoadingSave = false
         AlertSaveError()
       }
     })

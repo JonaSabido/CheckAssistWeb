@@ -40,3 +40,12 @@ $black-blue: #282437;
     background-position-y: 300px;
 }
 
+card-service {
+    width: 75%;
+}
+
+@media only screen and (min-width:0px) and (max-width: 990px) {
+    card-service {
+        width: 100%;
+    }
+}

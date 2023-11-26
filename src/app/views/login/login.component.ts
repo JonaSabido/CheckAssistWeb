@@ -14,10 +14,13 @@ import { JwtService } from 'src/app/services/jwt.service';
 export class LoginComponent {
 
   showError: boolean = false
+
   dataLogin: LoginPayload = {
     email: '',
     password: ''
   }
+
+  showLoading: boolean = false
 
   constructor(
     private service: AuthService,
@@ -30,8 +33,10 @@ export class LoginComponent {
 
   sendLogin() {
     if (PROPERTIES_FILLED(this.dataLogin)) {
+      this.showLoading = true
       this.service.login(this.dataLogin).subscribe({
         next: (response) => {
+          this.showLoading = false
           const authUser = this.jwtService.getData(response.token)
           if (authUser.id_profile == 2 || authUser.id_profile == 1) {
             localStorage.setItem('token_checkassist_app', response.token)
@@ -47,6 +52,7 @@ export class LoginComponent {
           }
         },
         error: (e) => {
+          this.showLoading = false
           this.showError = true
         }
       })

@@ -1,133 +1,147 @@
-<div class="card card-panel p-4" style="z-index: 1;">
-    <div class="card-header bg-white border-0">
-        <div class="d-md-flex justify-content-between align-items-center">
-            <div class="d-flex ">
-                <h3 class="fs-4 color-secondary montserrat"> Mis próximos eventos </h3>
-                <button class="btn-default ms-2">
-                    <span class="material-symbols-outlined color-primary-500 fs-4 clickeable" (click)="switchFilters()">
-                        tune
+<div class="card card-panel position-relative" style="z-index: 1;">
+    <div class="p-4">
+        <div class="card-header bg-white border-0">
+            <div class="d-md-flex justify-content-between align-items-center">
+                <div class="d-flex ">
+                    <h3 class="fs-4 color-secondary montserrat"> Mis próximos eventos </h3>
+                    <button class="btn-default color-primary-500 fs-4 clickeable ms-2" (click)="switchFilters()">
+                        <span class="material-symbols-outlined" *ngIf="!showFilters else templateHiddeFilters">
+                            tune
+                        </span>
+                        <ng-template #templateHiddeFilters>
+                            <span class="material-symbols-outlined">
+                                close
+                            </span>
+                        </ng-template>
+                    </button>
+                </div>
+                <button class="fill-button-primary-500 fs-6 d-flex align-items-center" (click)="openDialog('create')">
+                    <span class="material-symbols-outlined fs-6 m-1">
+                        calendar_add_on
                     </span>
+                    Nuevo Evento
                 </button>
             </div>
-            <button class="fill-button-primary-500 fs-6 d-flex align-items-center" (click)="openDialog('create')">
-                <span class="material-symbols-outlined fs-6 m-1">
-                    calendar_add_on
-                </span>
-                Nuevo Evento
-            </button>
+            <form #filtersForm="ngForm" (ngSubmit)="reload()" class="filters mt-2 d-md-flex animated bounce"
+                *ngIf="showFilters">
+                <div class="w-100 mt-2">
+                    <label for="filter_name" class="label-filter d-flex align-items-center">
+                        <span class="material-symbols-outlined fs-6">match_case</span>
+                        Nombre
+                    </label>
+                    <input type="text" class="form form-filter w-100" placeholder="Busqueda por nombre"
+                        [(ngModel)]="filters.name" name="filter_name" id="filter_name">
+                </div>
+                <div class="w-100 mt-2">
+                    <label for="filter_date_meeting" class="label-filter d-flex align-items-center">
+                        <span class="material-symbols-outlined fs-6">calendar_month</span>
+                        Fecha</label>
+                    <input type="date" class="form form-filter w-100" [(ngModel)]="filters.date_meeting"
+                        name="filter_date" id="filter_date">
+                </div>
+                <div class="w-100 mt-2">
+                    <label for="filter_start_hour" class="label-filter d-flex align-items-center">
+                        <span class="material-symbols-outlined fs-6">timer</span>
+                        Hora de inicio</label>
+                    <input type="time" class="form form-filter w-100" [(ngModel)]="filters.start_hour"
+                        name="filter_start_hour" id="filter_start_hour">
+                </div>
+                <div class="w-100 mt-2">
+                    <label for="filter_end_hour" class="label-filter d-flex align-items-center">
+                        <span class="material-symbols-outlined fs-6">timer</span>
+                        Hora de salida</label>
+                    <input type="time" class="form form-filter w-100" [(ngModel)]="filters.end_hour"
+                        name="filter_end_hour" id="filter_end_hour">
+                </div>
+                <div class="d-flex align-items-end">
+                    <button type="submit" class="button-search">
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </button>
+                </div>
+            </form>
+
         </div>
-        <form #filtersForm="ngForm" (ngSubmit)="reload()" class="filters mt-2 d-md-flex animated bounce"
-            *ngIf="showFilters">
-            <div class="w-100 mt-2">
-                <label for="filter_name" class="label-filter d-flex align-items-center">
-                    <span class="material-symbols-outlined fs-6">match_case</span>
-                    Nombre
-                </label>
-                <input type="text" class="form form-filter w-100" placeholder="Busqueda por nombre"
-                    [(ngModel)]="filters.name" name="filter_name" id="filter_name">
-            </div>
-            <div class="w-100 mt-2">
-                <label for="filter_date_meeting" class="label-filter d-flex align-items-center">
-                    <span class="material-symbols-outlined fs-6">calendar_month</span>
-                    Fecha</label>
-                <input type="date" class="form form-filter w-100" [(ngModel)]="filters.date_meeting" name="filter_date"
-                    id="filter_date">
-            </div>
-            <div class="w-100 mt-2">
-                <label for="filter_start_hour" class="label-filter d-flex align-items-center">
-                    <span class="material-symbols-outlined fs-6">timer</span>
-                    Hora de inicio</label>
-                <input type="time" class="form form-filter w-100" [(ngModel)]="filters.start_hour"
-                    name="filter_start_hour" id="filter_start_hour">
-            </div>
-            <div class="w-100 mt-2">
-                <label for="filter_end_hour" class="label-filter d-flex align-items-center">
-                    <span class="material-symbols-outlined fs-6">timer</span>
-                    Hora de salida</label>
-                <input type="time" class="form form-filter w-100" [(ngModel)]="filters.end_hour" name="filter_end_hour"
-                    id="filter_end_hour">
-            </div>
-            <div class="d-flex align-items-end">
-                <button type="submit" class="button-search">
-                    <span class="material-symbols-outlined">
-                        search
-                    </span>
-                </button>
-            </div>
-        </form>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mt-4" *ngFor="let row of entities">
+                    <div class="container-fluid card-meeting rounded mat-elevation-z3">
+                        <div class="row">
+                            <div class="col-1 bg-primary-80 rounded-start">
 
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6 mt-4" *ngFor="let row of entities">
-                <div class="container-fluid card-meeting rounded mat-elevation-z3">
-                    <div class="row">
-                        <div class="col-1 bg-primary-80 rounded-start">
-
-                        </div>
-                        <div [routerLink]="['/details', row.id]" class="col-11 p-4 bg-white rounded-end">
-                            <div class="d-flex justify-content-between">
-
-                                <h4 class="montserrat fs-3 color-primary-500 text-truncate">{{row.name}} </h4>
-
-                                <p class="fw-bold arial fs-6" *ngIf="row.date_meeting == today" style="color: green">
-                                    ¡Hoy!
-                                </p>
-                                <p class="color-primary-900 fw-bold arial fs-6"
-                                    *ngIf="calculateDifferenceDays(today, row.date_meeting) == 1">
-                                    ¡Mañana!
-                                </p>
                             </div>
-                            <div class="d-flex mt-2 ">
-                                <div class="d-flex justify-content-star align-items-center rounded bg-primary-80 ps-0 pe-2"
-                                    style="width: auto;">
+                            <div [routerLink]="['/details', row.id]" class="col-11 p-4 bg-white rounded-end">
+                                <div class="d-flex justify-content-between">
+
+                                    <h4 class="montserrat fs-3 color-primary-500 text-truncate">{{row.name}} </h4>
+
+                                    <p class="fw-bold arial fs-6" *ngIf="row.date_meeting == today"
+                                        style="color: green">
+                                        ¡Hoy!
+                                    </p>
+                                    <p class="color-primary-900 fw-bold arial fs-6"
+                                        *ngIf="calculateDifferenceDays(today, row.date_meeting) == 1">
+                                        ¡Mañana!
+                                    </p>
+                                </div>
+                                <div class="d-flex mt-2 ">
+                                    <div class="d-flex justify-content-star align-items-center rounded bg-primary-80 ps-0 pe-2"
+                                        style="width: auto;">
+                                        <span
+                                            class="color-primary-500 material-symbols-outlined fs-5 fw-bold me-1 ">encrypted</span>
+                                        <p class="color-primary-900 fw-bold arial fs-6 m-0">
+                                            {{row.code_meeting}}
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex mt-2">
                                     <span
-                                        class="color-primary-500 material-symbols-outlined fs-5 fw-bold me-1 ">encrypted</span>
-                                    <p class="color-primary-900 fw-bold arial fs-6 m-0">
-                                        {{row.code_meeting}}
+                                        class="material-symbols-outlined fs-5 color-primary-500 fw-bold me-1">calendar_month</span>
+                                    <p class="color-secondary fw-bold arial fs-6 mb-2">
+                                        {{row.date_meeting}}
+                                    </p>
+                                </div>
+                                <div class="d-flex ">
+                                    <span
+                                        class="material-symbols-outlined fs-5 color-primary-500 fw-bold me-1">timer</span>
+                                    <p class="color-secondary fw-bold arial fs-6">
+                                        {{row.start_hour}}
+                                        - {{row.end_hour}}
                                     </p>
                                 </div>
 
                             </div>
-                            <div class="d-flex mt-2">
-                                <span
-                                    class="material-symbols-outlined fs-5 color-primary-500 fw-bold me-1">calendar_month</span>
-                                <p class="color-secondary fw-bold arial fs-6 mb-2">
-                                    {{row.date_meeting}}
-                                </p>
-                            </div>
-                            <div class="d-flex ">
-                                <span class="material-symbols-outlined fs-5 color-primary-500 fw-bold me-1">timer</span>
-                                <p class="color-secondary fw-bold arial fs-6">
-                                    {{row.start_hour}}
-                                    - {{row.end_hour}}
-                                </p>
-                            </div>
-
                         </div>
                     </div>
+
                 </div>
-
             </div>
+            <p class="text-muted text-center mt-5" *ngIf="entities.length == 0 && !showLoading">Sin
+                resultados</p>
+
+            <!-- <div class="d-flex justify-content-end mt-4 w-100 overflow-x-auto">
+                <div class="d-flex justify-content-center">
+                    <a class="button-pagination">1</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="button-pagination">2</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="button-pagination-fill">3</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="button-pagination">4</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="button-pagination">5</a>
+                </div>
+    
+            </div> -->
         </div>
-        <p class="text-muted text-center" *ngIf="entities.length == 0">Sin resultados</p>
-        <!-- <div class="d-flex justify-content-end mt-4 w-100 overflow-x-auto">
-            <div class="d-flex justify-content-center">
-                <a class="button-pagination">1</a>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a class="button-pagination">2</a>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a class="button-pagination-fill">3</a>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a class="button-pagination">4</a>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a class="button-pagination">5</a>
-            </div>
-
-        </div> -->
+    </div>
+    <div class="position-absolute d-flex justify-content-center align-items-center w-100 h-100" *ngIf="showLoading">
+        <loading [size]="'big'" [color]="'primary-500'"></loading>
     </div>
 </div>

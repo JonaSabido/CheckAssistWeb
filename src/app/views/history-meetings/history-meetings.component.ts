@@ -21,9 +21,12 @@ export class HistoryMeetingsComponent {
 
   showFilters: boolean = false;
 
+  showLoading: boolean = false;
+
+
   columns: string[] = ['name', 'date_meeting', 'start_hour', 'end_hour', 'options'];
 
- 
+
 
   constructor(
     private service: MeetingService,
@@ -32,16 +35,19 @@ export class HistoryMeetingsComponent {
   }
 
   ngOnInit(): void {
-
     this.reload()
   }
 
   reload() {
+    this.showLoading = true
+    this.entities = []
     this.service.history(this.filters).subscribe({
       next: (response) => {
+        this.showLoading = false
         this.entities = response.data
       },
       error: (e) => {
+        this.showLoading = false
         this.entities = []
       }
     })

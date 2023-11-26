@@ -71,8 +71,8 @@ export class LocationDialogComponent {
 
 
 
-  closeDialog(): void {
-    this.dialog.close(true);
+  closeDialog(reload: boolean = false): void {
+    this.dialog.close(reload);
   }
 
   save() {

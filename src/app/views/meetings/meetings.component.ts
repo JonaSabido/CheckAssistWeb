@@ -21,6 +21,8 @@ export class MeetingsComponent {
 
   showFilters: boolean = false;
 
+  showLoading: boolean = false;
+
   columns: string[] = ['name', 'user', 'date_meeting', 'options'];
 
   constructor(
@@ -34,11 +36,15 @@ export class MeetingsComponent {
   }
 
   reload() {
+    this.showLoading = true
+    this.entities = []
     this.service.list(this.filters).subscribe({
       next: (response) => {
+        this.showLoading = false
         this.entities = response.data
       },
       error: (e) => {
+        this.showLoading = false
         this.entities = []
       }
     })

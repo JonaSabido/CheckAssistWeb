@@ -32,6 +32,7 @@ import { LocationDialogComponent } from './dialogs/location-dialog/location-dial
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BenefitComponent } from './components/benefit/benefit.component';
 import { ServiceComponent } from './components/service/service.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ServiceComponent } from './components/service/service.component';
     LocationDialogComponent,
     BenefitComponent,
     ServiceComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

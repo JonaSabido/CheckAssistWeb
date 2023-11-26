@@ -18,6 +18,8 @@ import { LocationDialogComponent } from '../location-dialog/location-dialog.comp
 export class MeetingDialogComponent {
 
   today = TODAY
+  showLoadingSave: boolean = false;
+
 
   constructor(
     private dialog: MatDialogRef<MeetingDialogComponent>,
@@ -26,32 +28,39 @@ export class MeetingDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: DataDialog<Meeting>
   ) { }
 
-  closeDialog(): void {
-    this.dialog.close(true);
+  closeDialog(reload: boolean = false): void {
+    this.dialog.close(reload);
   }
 
 
   create() {
+    this.showLoadingSave = true
+
     this.service.store(this.data.model).subscribe({
       next: (response) => {
-        this.closeDialog()
+        this.showLoadingSave = false
+        this.closeDialog(true)
         AlertSaveSuccess(1000).then(value => {
           AlertShowCode(response.data.code_meeting)
         })
       },
       error: (e) => {
+        this.showLoadingSave = false
         AlertSaveError()
       }
     })
   }
 
   update() {
+    this.showLoadingSave = true
     this.service.update(this.data.model.id, this.data.model).subscribe({
       next: (response) => {
+        this.showLoadingSave = false
         AlertSaveSuccess()
-        this.closeDialog()
+        this.closeDialog(true)
       },
       error: (e) => {
+        this.showLoadingSave = false
         AlertSaveError()
       }
     })
@@ -79,7 +88,7 @@ export class MeetingDialogComponent {
     this.matDialog.open(LocationDialogComponent, {
       data: dialogData,
       width: '100%',
-      
+
       panelClass: '',
       autoFocus: false
 

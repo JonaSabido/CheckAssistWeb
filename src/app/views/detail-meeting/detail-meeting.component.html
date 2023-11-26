@@ -1,15 +1,15 @@
-<div class="mat-elevation-z3 rounded card-detail-meeting bg-white" style="z-index: 1;">
-    <div class="container-fluid">
+<div class="mat-elevation-z3 rounded card-detail-meeting bg-white position-relative" style="z-index: 1;">
+    <div class="container-fluid" *ngIf="!showLoadingMeeting else templateShowLoadingMeeting">
         <div class="row">
             <div class="col-12 border-0 p-5 rounded-end">
                 <div class="d-block d-sm-flex align-items-center justify-content-between">
                     <h1 class="fs-1 color-primary-500 montserrat">{{meeting.name}}</h1>
                     <div class="d-flex">
-                        <button class="button-default me-4" (click)="openDialog('edit')"
+                        <button class="button-return me-4" (click)="openDialog('edit')"
                             *ngIf="meeting.date_meeting >= today" title="Editar evento">
                             <span class="material-symbols-outlined color-primary-500 fs-3">edit</span>
                         </button>
-                        <button class="button-default" (click)="delete()" title="Eliminar evento">
+                        <button class="button-return" (click)="delete()" title="Eliminar evento">
                             <span class="material-symbols-outlined text-danger fs-3">
                                 delete
                             </span>
@@ -51,6 +51,11 @@
             </div>
         </div>
     </div>
+    <ng-template #templateShowLoadingMeeting>
+        <div class="d-flex justify-content-center align-items-center w-100 h-100 position-absolute">
+            <loading [size]="'big'" [color]="'primary-500'"></loading>
+        </div>
+    </ng-template>
 </div>
 
 <div class="mat-elevation-z3 rounded card-detail-meeting bg-white mt-4" style="z-index: 1;">
@@ -74,7 +79,8 @@
                         <button type="submit" class="button-search"> Buscar </button>
                     </form> -->
                 <div *ngIf="typeView=='registers' else checks">
-                    <div class="responsive mat-elevation-z3 mt-4" *ngIf="registers.length else noDataRegister">
+                    <div class="responsive mat-elevation-z3 mt-4"
+                        *ngIf="registers.length && !showLoadingRegisters else noDataRegisterOrLoading">
                         <table mat-table [dataSource]="registers" class="my-table">
                             <ng-container matColumnDef="user">
                                 <th mat-header-cell *matHeaderCellDef> Usuario </th>
@@ -105,9 +111,16 @@
                             <tr mat-row *matRowDef="let row; columns: columns;"></tr>
                         </table>
                     </div>
-                    <ng-template #noDataRegister>
-                        <p class="text-center mt-5 arial">Sin usuarios registrados</p>
+                    <ng-template #noDataRegisterOrLoading>
+                        <p class="text-center mt-5 arial"
+                            *ngIf="!showLoadingRegisters else templateShowLoadingRegisters">Sin usuarios registrados</p>
+                        <ng-template #templateShowLoadingRegisters>
+                            <div class="d-flex justify-content-center align-items-center mt-5">
+                                <loading [size]="'medium'" [color]="'primary-300'"></loading>
+                            </div>
+                        </ng-template>
                     </ng-template>
+
                 </div>
 
                 <ng-template #checks>

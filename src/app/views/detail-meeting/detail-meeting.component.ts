@@ -41,10 +41,15 @@ export class DetailMeetingComponent {
     end_hour: ''
   }
 
+  showLoadingMeeting: boolean = false;
+  showLoadingRegisters: boolean = false;
+  showLoadingChecks: boolean = false;
+
+
+
   columns: string[] = ['user', 'createdAt', 'options'];
 
   columnsChecks: string[] = ['user', 'start_date', 'end_date', 'status', 'options'];
-
 
   typeView: 'registers' | 'checks' = 'registers';
 
@@ -74,30 +79,40 @@ export class DetailMeetingComponent {
   }
 
   getData() {
+    this.getMeeting()
+    this.getMeetingUsers()
+    this.getCheckUsers()
+  }
+
+  getMeeting() {
+    this.showLoadingMeeting = true
     this.service.single(this.id).subscribe({
       next: (response) => {
+        this.showLoadingMeeting = false
         this.meeting = response.data
       },
       error: (err) => {
+        this.showLoadingMeeting = false
         if (err.status == 403) {
           this.router.navigate(['/'], { relativeTo: this.route });
 
         }
       }
     })
-    this.getMeetingUsers()
-    this.getCheckUsers()
   }
 
 
 
   getMeetingUsers() {
+    this.showLoadingRegisters = true
     this.serviceMeetingUser.getByMeeting(this.id).subscribe(
       {
         next: (response) => {
+          this.showLoadingRegisters = false
           this.registers = response.data
         },
         error: (e) => {
+          this.showLoadingRegisters = false
           this.registers = []
         }
       }
@@ -105,12 +120,15 @@ export class DetailMeetingComponent {
   }
 
   getCheckUsers() {
+    this.showLoadingChecks = true
     this.serviceCheckUser.getByMeeting(this.id).subscribe(
       {
         next: (response) => {
+          this.showLoadingChecks = false
           this.checkUsers = response.data
         },
         error: (e) => {
+          this.showLoadingChecks = false
           this.checkUsers = []
         }
       }
@@ -130,7 +148,9 @@ export class DetailMeetingComponent {
       autoFocus: false
 
     }).afterClosed().subscribe(value => {
-      this.getData()
+      if (value) {
+        this.getData()
+      }
     })
   }
 
