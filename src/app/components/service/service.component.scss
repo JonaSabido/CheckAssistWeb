@@ -15,7 +15,7 @@ $black-blue: #282437;
 .card-service {
     border: 1px $blue-500 solid;
     border-radius: 15px;
-    height: 400px;
+    height: 420px;
     box-shadow: 0px 5px 5px 2px $blue-80;
     transition: 400ms;
 
@@ -27,9 +27,28 @@ $black-blue: #282437;
     }
 }
 
-@media only screen and (max-width:767px) {
-    .card-service {
-        height: 510px;
-    }
 
+
+@media only screen and (min-width:768px) and (max-width: 1999px) {
+    .card-service {
+        height: 480px;
+    }
+}
+
+@media only screen and (min-width:351px) and (max-width: 500px) {
+    .card-service {
+        height: 500px;
+    }
+}
+
+@media only screen and (min-width:301px) and (max-width: 350px) {
+    .card-service {
+        height: 550px;
+    }
+}
+
+@media only screen and (min-width:0px) and (max-width: 300px) {
+    .card-service {
+        height: 620px;
+    }
 }

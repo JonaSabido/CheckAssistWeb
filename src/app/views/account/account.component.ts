@@ -13,6 +13,9 @@ export class AccountComponent {
 
   showSuccess: boolean = false
   showError: boolean = false
+  showLoading: boolean = false;
+  showLoadingSave: boolean = false;
+
 
   user: User = {
     id: 0,
@@ -35,14 +38,17 @@ export class AccountComponent {
   }
 
   onSubmit() {
+    this.showLoadingSave = true
     this.showError = false
     this.showSuccess = false
     this.userService.update(this.user.id, this.user).subscribe({
       next: (response) => {
+        this.showLoadingSave = false
         AlertSaveSuccess()
         this.showSuccess = true
       },
       error: (e) => {
+        this.showLoadingSave = false
         AlertSaveError()
         this.showError = true
       }
@@ -50,7 +56,9 @@ export class AccountComponent {
   }
 
   getData() {
+    this.showLoading = true
     this.authService.userByToken().subscribe(response => {
+      this.showLoading = false
       this.user = response.data
     })
   }

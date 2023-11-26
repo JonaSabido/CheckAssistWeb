@@ -1,100 +1,108 @@
-<div class="card p-4" style="z-index: 1;">
-    <div class="card-header bg-white border-0">
-        <div class="d-md-flex justify-content-between align-items-center">
-            <div class="">
-                <h3 class="fs-4 color-secondary montserrat"> Mi Cuenta</h3>
+<div class="card card-panel position-relative" style="z-index: 1;">
+    <div class="p-4" *ngIf="!showLoading">
+        <div class="card-header bg-white border-0">
+            <div class="d-md-flex justify-content-between align-items-center">
+                <div class="">
+                    <h3 class="fs-4 color-secondary montserrat"> Mi Cuenta</h3>
+                </div>
             </div>
-        </div>
 
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-center" style="height: 200px;">
+                <img class="img-fluid" src="assets/images/conceptual-account-v2.png">
+            </div>
+            <form #accountForm="ngForm" (ngSubmit)="onSubmit()" class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 mt-3">
+                        <label class="arial fw-bold color-primary-900 mb-1" for="name">Nombres</label>
+                        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="user.name"
+                            placeholder="Escriba sus nombres" #name="ngModel" required maxlength="100"
+                            [disabled]="showLoadingSave">
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                            <label class="text-error" *ngIf="name.errors && name.errors['required']" class="error">Este
+                                campo es
+                                requerido.</label>
+                            <label class="text-error" *ngIf="name.errors && name.errors['maxlength']" class="error">Este
+                                campo
+                                acepta máximo 100 caractéres</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label class="arial fw-bold color-primary-900 mb-1" for="last_name">Apelidos</label>
+                        <input class="form-control" type="text" id="last_name" name="last_name"
+                            [(ngModel)]="user.last_name" placeholder="Escriba sus apellidos" #last_name="ngModel"
+                            required maxlength="200" [disabled]="showLoadingSave">
+                        <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
+                            <label class="text-error" *ngIf="last_name.errors && last_name.errors['required']"
+                                class="error">Este
+                                campo es
+                                requerido.</label>
+                            <label class="text-error" *ngIf="last_name.errors && last_name.errors['maxlength']"
+                                class="error">Este
+                                campo
+                                acepta máximo 200 caractéres</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label class="arial fw-bold color-primary-900 mb-1" for="email">Correo electrónico</label>
+                        <input class="form-control" type="email" id="email" name="email" [(ngModel)]="user.email"
+                            placeholder="Escriba su correo electrónico" #email="ngModel" required maxlength="255"
+                            disabled>
+                        <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                            <label class="text-error" *ngIf="email.errors && email.errors['required']" class="error">Este
+                                campo es
+                                requerido.</label>
+                            <label class="text-error" *ngIf="email.errors && email.errors['maxlength']" class="error">Este
+                                campo
+                                acepta máximo 50 caractéres</label>
+                        </div> -->
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label class="arial fw-bold color-primary-900 mb-1" for="password">Contraseña</label>
+                        <input class="form-control" type="password" id="password" name="password"
+                            [(ngModel)]="user.password" placeholder="Escriba su contraseña" #password="ngModel" required
+                            minlength="8" maxlength="255" [disabled]="showLoadingSave">
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                            <label class="text-error" *ngIf="password.errors && password.errors['required']"
+                                class="error">Este
+                                campo es
+                                requerido.</label>
+
+                            <label class="text-error" *ngIf="password.errors && password.errors['minlength']"
+                                class="error">La contraseña debe tener mínimo 8 caractéres</label>
+
+                            <label class="text-error" *ngIf="password.errors && password.errors['maxlength']"
+                                class="error">La contraseña debe tener máximo 255 caractéres</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- <p class="text-light fs-6 arial text-center mt-4" >¡Datos guardados con éxito!</p>
+                <p class="error fs-6 arial text-center mt-4" *ngIf="showError">Ocurrio un error, intentelo de nuevo</p> -->
+
+                <div class="d-sm-flex justify-content-center mt-4">
+                    <button class="button-return m-1 d-flex align-items-center" (click)="getData()" type="button"
+                        [disabled]="showLoadingSave">
+                        <span class="material-symbols-outlined fs-5 me-1">
+                            close
+                        </span>Cancelar</button>
+                    <button class="button-save m-1 d-flex align-items-center" type="submit"
+                        [disabled]="accountForm.invalid || showLoadingSave">
+                        <span class="material-symbols-outlined fs-5 m-1" *ngIf="!showLoadingSave">
+                            save
+                        </span>
+                        <loading class="m-1" [size]="'small'" [color]="'white'" *ngIf="showLoadingSave"></loading>
+                        <span *ngIf="!showLoadingSave else templateTextSaveLoading">Guardar</span>
+                        <ng-template #templateTextSaveLoading>
+                            <span>Guardando...</span>
+                        </ng-template>
+
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="card-body">
-        <div class="d-flex justify-content-center" style="height: 200px;">
-            <img class="img-fluid" src="assets/images/conceptual-account-v2.png">
-        </div>
-        <form #accountForm="ngForm" (ngSubmit)="onSubmit()" class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 mt-3">
-                    <label class="arial fw-bold color-primary-900 mb-1" for="name">Nombres</label>
-                    <input class="form-control" type="text" id="name" name="name" [(ngModel)]="user.name"
-                        placeholder="Escriba sus nombres" #name="ngModel" required maxlength="100">
-                    <div *ngIf="name.invalid && (name.dirty || name.touched)">
-                        <label class="text-error" *ngIf="name.errors && name.errors['required']" class="error">Este
-                            campo es
-                            requerido.</label>
-                        <label class="text-error" *ngIf="name.errors && name.errors['maxlength']" class="error">Este
-                            campo
-                            acepta máximo 100 caractéres</label>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-3">
-                    <label class="arial fw-bold color-primary-900 mb-1" for="last_name">Apelidos</label>
-                    <input class="form-control" type="text" id="last_name" name="last_name" [(ngModel)]="user.last_name"
-                        placeholder="Escriba sus apellidos" #last_name="ngModel" required maxlength="200">
-                    <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)">
-                        <label class="text-error" *ngIf="last_name.errors && last_name.errors['required']"
-                            class="error">Este
-                            campo es
-                            requerido.</label>
-                        <label class="text-error" *ngIf="last_name.errors && last_name.errors['maxlength']"
-                            class="error">Este
-                            campo
-                            acepta máximo 200 caractéres</label>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-3">
-                    <label class="arial fw-bold color-primary-900 mb-1" for="email">Correo electrónico</label>
-                    <input class="form-control" type="email" id="email" name="email" [(ngModel)]="user.email"
-                        placeholder="Escriba su correo electrónico" #email="ngModel" required maxlength="255" disabled>
-                    <!-- <div *ngIf="email.invalid && (email.dirty || email.touched)">
-                        <label class="text-error" *ngIf="email.errors && email.errors['required']" class="error">Este
-                            campo es
-                            requerido.</label>
-                        <label class="text-error" *ngIf="email.errors && email.errors['maxlength']" class="error">Este
-                            campo
-                            acepta máximo 50 caractéres</label>
-                    </div> -->
-                </div>
-                <div class="col-md-6 mt-3">
-                    <label class="arial fw-bold color-primary-900 mb-1" for="password">Contraseña</label>
-                    <input class="form-control" type="password" id="password" name="password"
-                        [(ngModel)]="user.password" placeholder="Escriba su contraseña" #password="ngModel" required
-                        minlength="8" maxlength="255">
-                    <div *ngIf="password.invalid && (password.dirty || password.touched)">
-                        <label class="text-error" *ngIf="password.errors && password.errors['required']"
-                            class="error">Este
-                            campo es
-                            requerido.</label>
-
-                        <label class="text-error" *ngIf="password.errors && password.errors['minlength']"
-                            class="error">Este
-                            campo
-                            acepta mínimo 8 caractéres</label>
-
-                        <label class="text-error" *ngIf="password.errors && password.errors['maxlength']"
-                            class="error">Este
-                            campo
-                            acepta máximo 255 caractéres</label>
-                    </div>
-                </div>
-            </div>
-            <!-- <p class="text-light fs-6 arial text-center mt-4" >¡Datos guardados con éxito!</p>
-            <p class="error fs-6 arial text-center mt-4" *ngIf="showError">Ocurrio un error, intentelo de nuevo</p> -->
-
-            <div class="d-sm-flex justify-content-center mt-4">
-                <button class="button-return m-1 d-flex align-items-center" (click)="getData()" type="button">
-                    <span class="material-symbols-outlined fs-5 me-1">
-                        close
-                    </span>Cancelar</button>
-                <button class="button-save m-1 d-flex align-items-center" type="submit"
-                    [disabled]="accountForm.invalid">
-                    <span class="material-symbols-outlined fs-5 m-1">
-                        save
-                    </span>
-                    Guardar</button>
-            </div>
-
-
-        </form>
-
+    <div class="position-absolute d-flex justify-content-center align-items-center w-100 h-100" *ngIf="showLoading">
+        <loading [size]="'big'" [color]="'primary-500'"></loading>
     </div>
 </div>

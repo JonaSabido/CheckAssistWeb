@@ -2,9 +2,12 @@
     <h3 class="montserrat fs-3 text-center color-primary-900 text-center"> {{title}}
         <br> {{afterBr}}
     </h3>
-    <ul class="montserrat fs-6 color-secondary mt-4 list-style-square">
-        <li class="mt-2" *ngFor="let description of descriptions">
-            {{description}}
-        </li>
-    </ul>
+    <div class="mt-4 ">
+        <div class="d-flex mt-2" *ngFor="let description of descriptions">
+            <span class="material-symbols-outlined fs-5 color-primary-500 me-2">done</span>
+            <p class="montserrat fs-6 color-secondary">
+                {{description}}
+            </p>
+        </div>
+    </div>
 </article>

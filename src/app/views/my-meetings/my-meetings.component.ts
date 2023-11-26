@@ -43,6 +43,9 @@ export class MyMeetingsComponent implements OnInit {
 
   showFilters: boolean = false;
 
+  showLoading: boolean = false;
+
+
   today = TODAY
 
   constructor(
@@ -60,11 +63,15 @@ export class MyMeetingsComponent implements OnInit {
   }
 
   reload() {
+    this.showLoading = true
+    this.entities = []
     this.service.availables(this.filters).subscribe({
       next: (response) => {
+        this.showLoading = false
         this.entities = response.data
       },
       error: (e) => {
+        this.showLoading = false
         this.entities = []
       }
     })
@@ -83,7 +90,9 @@ export class MyMeetingsComponent implements OnInit {
       autoFocus: false
 
     }).afterClosed().subscribe(value => {
-      this.reload()
+      if (value) {
+        this.reload()
+      }
     })
   }
 

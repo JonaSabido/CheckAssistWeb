@@ -35,6 +35,9 @@ export class UsersComponent {
 
   showFilters: boolean = false;
 
+  showLoading: boolean = false;
+
+
   columns: string[] = ['name', 'last_name', 'email', 'profile_name', 'options'];
 
   authUser: AuthUser = {
@@ -60,11 +63,15 @@ export class UsersComponent {
   }
 
   reload() {
+    this.showLoading = true
+    this.entities = []
     this.service.list(this.filters).subscribe({
       next: (response) => {
+        this.showLoading = false
         this.entities = response.data
       },
       error: (e) => {
+        this.showLoading = false
         this.entities = []
       }
     })
@@ -83,7 +90,9 @@ export class UsersComponent {
       autoFocus: false
 
     }).afterClosed().subscribe(value => {
-      this.reload()
+      if (value) {
+        this.reload()
+      }
     })
   }
 

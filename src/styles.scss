@@ -215,6 +215,7 @@ body {
     font-weight: 500;
     transition: $transition-buttons;
     border: none;
+    height: 38px;
 
     &:hover {
         background-color: $blue-900;
@@ -240,6 +241,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
     transition: $transition-buttons;
+    height: 38px;
 
     &:hover {
         background-color: $blue-50;
@@ -249,6 +251,12 @@ body {
     &:focus {
         border: 1px #b4b4b4 solid;
         outline: none;
+    }
+
+    &:disabled {
+        color: #adadad;
+        background-color: white;
+        cursor: default;
     }
 }
 

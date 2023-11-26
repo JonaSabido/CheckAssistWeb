@@ -18,6 +18,8 @@ export class RegisterComponent {
     email: '',
     password: ''
   }
+  showLoading: boolean = false
+
 
   constructor(
     private service: AuthService,
@@ -27,11 +29,14 @@ export class RegisterComponent {
 
   sendRegister() {
     if (PROPERTIES_FILLED(this.dataRegister)) {
+      this.showLoading = true
       this.service.register(this.dataRegister).subscribe({
         next: (response) => {
+          this.showLoading = false
           this.router.navigate(['/login'], { relativeTo: this.route });
         },
         error: (e) => {
+          this.showLoading = false
           this.showError = true
         }
       })
