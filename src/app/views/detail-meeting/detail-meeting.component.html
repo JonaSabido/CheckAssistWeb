@@ -140,7 +140,7 @@
 
                             <ng-container matColumnDef="end_date">
                                 <th mat-header-cell *matHeaderCellDef> Hora de salida </th>
-                                <td mat-cell *matCellDef="let element"> {{element.end_date.slice(11, 16)}} </td>
+                                <td mat-cell *matCellDef="let element"> {{element.end_date?.slice(11, 16) ?? 'Sin registrar'}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="status">
