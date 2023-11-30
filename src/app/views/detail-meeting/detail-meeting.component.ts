@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertDeleteError, AlertDeleteSuccess } from 'shared/utils/alerts';
 import { Confirm } from 'shared/utils/alerts-config';
-import { TODAY } from 'shared/utils/constants';
+import { CHECKUSER_STATUS, TODAY } from 'shared/utils/constants';
 import { CheckDialogComponent } from 'src/app/dialogs/check-dialog/check-dialog.component';
 import { LocationDialogComponent } from 'src/app/dialogs/location-dialog/location-dialog.component';
 import { MeetingDialogComponent } from 'src/app/dialogs/meeting-dialog/meeting-dialog.component';
@@ -55,7 +55,9 @@ export class DetailMeetingComponent {
 
   id: number = 0;
 
-  today = TODAY
+  today = TODAY()
+
+  checkUserStatus = CHECKUSER_STATUS
 
 
 

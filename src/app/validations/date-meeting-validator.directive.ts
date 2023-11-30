@@ -9,7 +9,7 @@ import { TODAY } from 'shared/utils/constants';
 })
 export class DateMeetingValidatorDirective implements Validator {
 
-  today = TODAY
+  today = TODAY()
 
   validate(control: AbstractControl): ValidationErrors {
     const value = <string>control.value

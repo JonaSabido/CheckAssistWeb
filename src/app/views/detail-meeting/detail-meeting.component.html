@@ -145,7 +145,19 @@
 
                             <ng-container matColumnDef="status">
                                 <th mat-header-cell *matHeaderCellDef> Status </th>
-                                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                                <td mat-cell *matCellDef="let element" class="fw-weight-500"
+                                    [ngClass]="{
+                                        'only-start' : element.status === checkUserStatus.OnlyStart,
+                                        'completed' : element.status === checkUserStatus.Completed,
+                                        'canceled' : element.status === checkUserStatus.Canceled
+                                    }">
+                                    <div class="d-flex align-items-center">
+                                        <span class="material-symbols-outlined fs-6 me-1">
+                                            radio_button_checked
+                                        </span>
+                                        <span>{{element.status}}</span>
+                                    </div>
+                                </td>
                             </ng-container>
 
                             <ng-container matColumnDef="options">
