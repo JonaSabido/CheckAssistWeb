@@ -18,14 +18,26 @@ $black-blue: #282437;
     min-height: 50vh;
 }
 
-.button-location{
+.button-location {
     outline: none;
     border: none;
     background-color: white;
     transition: 200ms;
 
-    &:hover{
+    &:hover {
         scale: 105%;
         transition: 200ms;
     }
+}
+
+.only-start {
+    color: #f0ad4e
+}
+
+.completed {
+    color: #5cb85c;
+}
+
+.canceled {
+    color: #d9534f;
 }

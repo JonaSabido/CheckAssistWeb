@@ -45,8 +45,7 @@ export class MyMeetingsComponent implements OnInit {
 
   showLoading: boolean = false;
 
-
-  today = TODAY
+  today = TODAY()
 
   constructor(
     private dialog: MatDialog,
