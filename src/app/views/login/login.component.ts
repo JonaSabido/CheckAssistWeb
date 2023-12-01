@@ -41,7 +41,7 @@ export class LoginComponent {
           if (authUser.id_profile == 2 || authUser.id_profile == 1) {
             localStorage.setItem('token_checkassist_app', response.token)
             if (authUser.id_profile == 2) {
-              this.router.navigate(['/my-meetings'], { relativeTo: this.route });
+              this.router.navigate(['/dashboard'], { relativeTo: this.route });
             }
             else if (authUser.id_profile == 1) {
               this.router.navigate(['/meetings'], { relativeTo: this.route });

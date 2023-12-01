@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout-admin.component.scss']
 })
 export class LayoutAdminComponent {
+  showSidebar: boolean = true;
 
+  switchShowSidebar() {
+    this.showSidebar = !this.showSidebar
+  }
 }

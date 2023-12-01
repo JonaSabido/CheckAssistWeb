@@ -2,12 +2,11 @@
     <div class="sidebar bg-primary-900 collapsing navbar-collapse">
         <div
             class="sidebar-header d-flex justify-content-center align-items-center p-2 bg-primary-950 text-white clickeable">
-            <span class="material-symbols-outlined fs-1">
-                menu
-            </span>
+            
         </div>
         <div class="sidebar-body">
-            <div class="d-flex justify-content-center text-white icon-sidebar p-3" title="Inicio">
+            <div class="d-flex justify-content-center text-white icon-sidebar p-3" [routerLink]="'dashboard'"
+                title="Dashboard" *ngIf="userLogged.id_profile==2">
 
                 <span class="material-symbols-outlined fs-1">
                     home
