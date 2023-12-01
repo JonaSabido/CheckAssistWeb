@@ -5,11 +5,11 @@
                 <div class="d-flex ">
                     <h3 class="fs-4 color-secondary montserrat"> Usuarios </h3>
                     <button class="btn-default color-primary-500 fs-4 clickeable ms-2" (click)="switchFilters()">
-                        <span class="material-symbols-outlined" *ngIf="!showFilters else templateHiddeFilters">
+                        <span class="material-symbols-outlined" *ngIf="!showFilters else templateHiddeFilters" title="Mostrar filtros" >
                             tune
                         </span>
                         <ng-template #templateHiddeFilters>
-                            <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined" title="Ocultar filtros">
                                 close
                             </span>
                         </ng-template>

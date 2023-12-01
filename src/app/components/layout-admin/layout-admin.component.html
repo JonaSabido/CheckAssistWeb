@@ -1,9 +1,15 @@
 <div class="container-fluid">
     <div class="row">
+        <button id="button-menu" (click)="switchShowSidebar()"
+            [ngClass]="{'text-white': showSidebar, 'color-secondary': !showSidebar, 'bg-primary-950': showSidebar, 'bg-white': !showSidebar}">
+            <span class="material-symbols-outlined fs-1">
+                menu
+            </span>
+        </button>
         <app-headbar></app-headbar>
-        <app-sidebar></app-sidebar>
+        <app-sidebar *ngIf="showSidebar"></app-sidebar>
     </div>
-    <div class="content">
+    <div [ngClass]="{'margin-with-sidebar': showSidebar, 'margin-without-sidebar': !showSidebar}">
         <router-outlet></router-outlet>
     </div>
     <div class="mt-5">

@@ -10,11 +10,18 @@ import { AdminGuard } from 'src/app/helpers/guards/admin-guard';
 import { OrganizerGuard } from 'src/app/helpers/guards/organizer-guard';
 import { AnyGuard } from 'src/app/helpers/guards/any-guard';
 import { MeetingsComponent } from 'src/app/views/meetings/meetings.component';
+import { DashboardComponent } from 'src/app/views/dashboard/dashboard.component';
 
 const routes: Routes = [{
   path: '',
   component: LayoutAdminComponent,
   children: [
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
+      canActivate: [OrganizerGuard],
+
+    },
     {
       path: 'my-meetings',
       component: MyMeetingsComponent,

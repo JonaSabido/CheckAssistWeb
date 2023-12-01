@@ -33,6 +33,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { BenefitComponent } from './components/benefit/benefit.component';
 import { ServiceComponent } from './components/service/service.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     BenefitComponent,
     ServiceComponent,
     LoadingComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

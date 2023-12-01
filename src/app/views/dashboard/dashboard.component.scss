@@ -1,0 +1,27 @@
+$blue-50: #f6f6ff;
+$blue-80: #f0f0ff;
+$blue-100: #e4e4ff;
+$blue-200: #cdceff;
+$blue-300: #a7a6ff;
+$blue-400: #7c73ff;
+$blue-500: #533bff;
+$blue-600: #3e14ff;
+$blue-700: #2b00ff;
+$blue-800: #2501d6;
+$blue-900: #2003af;
+$blue-950: #0f0077;
+$black-blue: #282437;
+
+#banner-title {
+    box-shadow: 0px 3px 0px 3px $blue-400;
+    min-height: 80px;
+}
+
+.card-info {
+    min-height: 150px;
+    background-color: $blue-500;
+}
+
+#container-chart {
+    min-height: 500px;
+}

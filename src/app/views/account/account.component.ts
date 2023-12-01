@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertSaveError, AlertSaveSuccess } from 'shared/utils/alerts';
 import { User } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
@@ -28,7 +29,9 @@ export class AccountComponent {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
   }
@@ -46,6 +49,8 @@ export class AccountComponent {
         this.showLoadingSave = false
         AlertSaveSuccess()
         this.showSuccess = true
+        localStorage.removeItem('token_checkassist_app')
+        this.router.navigate(['/login'], { relativeTo: this.route });
       },
       error: (e) => {
         this.showLoadingSave = false
