@@ -19,26 +19,51 @@
         </div>
         <div class="col-12 col-md-3 mt-4">
 
-            <div class="mat-elevation-z3 rounded card-info d-flex justify-content-center align-items-center m-0 p-0">
-                <div class="text-center text-white m-0 p-0">
-                    <p class="display-3 jakarta m-0">{{totalMeetings}}</p>
-                    <p class="jakarta m-0" style="font-size: 14px;">Total de eventos</p>
+            <div class="mat-elevation-z3 rounded card-info m-0 p-0">
+                <div class="d-flex justify-content-end me-2 text-white ">
+                    <span class="material-symbols-outlined mt-2 fs-4">
+                        event
+                    </span>
+                </div>
+                <div class="d-flex justify-content-center align-items-center h-100" style="height: 100%;">
+                    <div class="text-center text-white m-0 p-0">
+                        <p class="display-3 jakarta m-0">{{totalMeetings}}</p>
+                        <p class="jakarta m-0 mb-3" style="font-size: 14px;">Total de eventos</p>
+                    </div>
                 </div>
             </div>
-            <div
-                class="mt-4 mat-elevation-z3 rounded card-info d-flex justify-content-center align-items-center m-0 p-0">
-                <div class="text-center text-white m-0 p-0">
-                    <p class="display-3 jakarta m-0">{{totalAllRegistersMeeting}}</p>
-                    <p class="jakarta m-0" style="font-size: 14px;">Total de participantes <br> en mis eventos</p>
+            <div class="mt-4 mat-elevation-z3 rounded card-info ">
+                <div class="d-flex justify-content-end me-2 text-white ">
+                    <span class="material-symbols-outlined mt-2 fs-4">
+                        groups
+                    </span>
                 </div>
+                <div class="d-flex justify-content-center align-items-center h-100" style="height: 100%;">
+                    <div class="text-center text-white m-0 p-0">
+                        <p class="display-3 jakarta m-0">{{totalAllRegistersMeeting}}</p>
+                        <p class="jakarta m-0 mb-3" style="font-size: 14px;">Total de participantes <br> en mis eventos
+                        </p>
+                    </div>
+                </div>
+
             </div>
-            <div
-                class="mt-4 mat-elevation-z3 rounded card-info d-flex justify-content-center align-items-center m-0 p-0">
-                <div class="text-center text-white m-0 p-0">
-                    <p class="display-3 jakarta m-0">{{ totalMeetings != 0 ? totalAllRegistersMeeting / totalMeetings :
-                        0 }}</p>
-                    <p class="jakarta m-0" style="font-size: 14px;">Promedio de participantes <br> por evento</p>
+            <div class="mt-4 mat-elevation-z3 rounded card-info ">
+                <div class="d-flex justify-content-end me-2 text-white ">
+                    <span class="material-symbols-outlined mt-2 fs-4">
+                        pin
+                    </span>
                 </div>
+                <div class="d-flex justify-content-center align-items-center h-100" style="height: 100%;">
+                    <div class="text-center text-white m-0 p-0">
+                        <p class="display-3 jakarta m-0">{{ totalMeetings != 0 ? totalAllRegistersMeeting /
+                            totalMeetings :
+                            0 }}</p>
+                        <p class="jakarta m-0 mb-3" style="font-size: 14px;">Promedio de participantes <br> por evento
+                        </p>
+
+                    </div>
+                </div>
+
             </div>
         </div>
 
