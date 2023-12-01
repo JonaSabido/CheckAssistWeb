@@ -2,7 +2,14 @@ export const TODAY = () => {
     const date = new Date();
     const options = { timeZone: 'America/Mexico_City' };
     const localeDate = date.toLocaleString('es-MX', options);
-    const output = localeDate.slice(6, 10) + '-' + localeDate.slice(3, 5) + '-' + localeDate.slice(0, 2)
+
+    const adjustedLocaleDate = /^\d{2}/.test(localeDate) ? localeDate : '0' + localeDate;
+
+    const day = adjustedLocaleDate.slice(0, 2);
+    const month = adjustedLocaleDate.slice(3, 5);
+    const year = adjustedLocaleDate.slice(6, 10);
+
+    const output = year + '-' + month + '-' + day;
     return output;
 }
 
