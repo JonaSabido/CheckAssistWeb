@@ -9,6 +9,11 @@ export class NavbarComponent {
   offsetY = 0
   isHome = window.location.pathname === '/#catalogo' || window.location.pathname === '/'
   navActve: boolean = false;
+  existsToken = localStorage.getItem('token_checkassist_app') || false
+
+  ngOnInit(){
+    console.log(this.existsToken)
+  }
 
   @HostListener("window:scroll", ['$event'])
 
