@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertDeleteError, AlertDeleteSuccess } from 'shared/utils/alerts';
+import { AlertChangeStatusError, AlertChangeStatusSuccess, AlertDeleteError, AlertDeleteSuccess } from 'shared/utils/alerts';
 import { Confirm } from 'shared/utils/alerts-config';
-import { CHECKUSER_STATUS, TODAY } from 'shared/utils/constants';
+import { CHECKUSER_STATUS, TODAY, CheckUserStatusValues } from 'shared/utils/constants';
 import { CheckDialogComponent } from 'src/app/dialogs/check-dialog/check-dialog.component';
 import { LocationDialogComponent } from 'src/app/dialogs/location-dialog/location-dialog.component';
 import { MeetingDialogComponent } from 'src/app/dialogs/meeting-dialog/meeting-dialog.component';
@@ -26,7 +26,6 @@ export class DetailMeetingComponent {
   registers: MeetingUser[] = []
 
   checkUsers: CheckUser[] = []
-
 
   meeting: Meeting = {
     id: 0,
@@ -227,6 +226,29 @@ export class DetailMeetingComponent {
           },
           error: (e) => {
             AlertDeleteError()
+          }
+        })
+      }
+    })
+  }
+
+  changeCheckStatus(checkUser: CheckUser, status: CheckUserStatusValues) {
+    Confirm.fire({
+      title: `¿Esta seguro que desea ${status == this.checkUserStatus.Canceled ? 'cancelar' : 'revocar'} la asistencia de ${checkUser.meeting_user?.user?.name} ${checkUser.meeting_user?.user?.last_name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true,
+    }).then(result => {
+      if (result.value) {
+        this.serviceCheckUser.changeStatus(checkUser.id, status).subscribe({
+          next: (response) => {
+            AlertChangeStatusSuccess()
+            this.getCheckUsers()
+          },
+          error: (e) => {
+            AlertChangeStatusError()
           }
         })
       }

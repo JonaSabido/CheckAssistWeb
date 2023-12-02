@@ -29,4 +29,6 @@ export const CHECKUSER_STATUS = {
     OnlyStart: 'Entrada registrada',
     Completed: 'Completada',
     Canceled: 'Cancelada'
-}
+} as const;
+
+export type CheckUserStatusValues = typeof CHECKUSER_STATUS[keyof typeof CHECKUSER_STATUS];

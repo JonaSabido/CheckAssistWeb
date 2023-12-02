@@ -21,6 +21,16 @@ export const AlertDeleteError = () => Toast.fire({
     title: 'Error al eliminar'
 })
 
+export const AlertChangeStatusSuccess = () => Toast.fire({
+    icon: 'success',
+    title: 'Status modificado correctamente'
+})
+
+export const AlertChangeStatusError = () => Toast.fire({
+    icon: 'error',
+    title: 'Error al modificar el status'
+})
+
 export const AlertShowCode = (code_meeting: string) => ToastShowCode.fire({
     title: code_meeting,
     text: '¡Código de acceso para tu evento!',
