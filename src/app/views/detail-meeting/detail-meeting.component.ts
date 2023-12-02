@@ -255,4 +255,8 @@ export class DetailMeetingComponent {
     })
   }
 
+  generateReport(){
+    const headers = ['Apellidos', 'Nombres', 'Hora de entrada', 'Hora de salida', 'Status']
+  }
+
 }

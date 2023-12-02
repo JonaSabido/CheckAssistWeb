@@ -14,3 +14,16 @@ export interface Meeting extends Model {
     user?: User,
     selectedLocation?: boolean,
 }
+
+interface Attendance {
+    last_name: string,
+    name: string,
+    check_in: string,
+    check_out: string,
+    status: string,
+}
+
+export interface MeetingAttendance {
+    meeting: Meeting,
+    attendance: Attendance[]
+}
