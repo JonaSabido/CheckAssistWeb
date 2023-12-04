@@ -28,7 +28,8 @@ export const DIFFERENCE_BETWEEN_TWO_DATES = (first_date: string, second_date: st
 export const CHECKUSER_STATUS = {
     OnlyStart: 'Entrada registrada',
     Completed: 'Completada',
-    Canceled: 'Cancelada'
+    Canceled: 'Cancelada',
+    WithOut: 'Sin asistencia'
 } as const;
 
 export type CheckUserStatusValues = typeof CHECKUSER_STATUS[keyof typeof CHECKUSER_STATUS];

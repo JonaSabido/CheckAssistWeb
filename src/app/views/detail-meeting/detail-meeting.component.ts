@@ -9,11 +9,13 @@ import { LocationDialogComponent } from 'src/app/dialogs/location-dialog/locatio
 import { MeetingDialogComponent } from 'src/app/dialogs/meeting-dialog/meeting-dialog.component';
 import { CheckUser } from 'src/app/interfaces/checkuser.interface';
 import { DataDialog } from 'src/app/interfaces/data-dialog.interface';
-import { Meeting } from 'src/app/interfaces/meeting.interface';
+import { Attendance, Meeting } from 'src/app/interfaces/meeting.interface';
 import { MeetingUser } from 'src/app/interfaces/meetinguser.interface';
 import { CheckUserService } from 'src/app/services/checkuser.service';
 import { MeetingService } from 'src/app/services/meeting.service';
 import { MeetingUserService } from 'src/app/services/meetingusers.service';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-detail-meeting',
@@ -65,6 +67,7 @@ export class DetailMeetingComponent {
     private service: MeetingService,
     private serviceMeetingUser: MeetingUserService,
     private serviceCheckUser: CheckUserService,
+    private serviceMeeting: MeetingService,
     private dialog: MatDialog,
     public router: Router
 
@@ -255,8 +258,130 @@ export class DetailMeetingComponent {
     })
   }
 
-  generateReport(){
-    const headers = ['Apellidos', 'Nombres', 'Hora de entrada', 'Hora de salida', 'Status']
+  generateReport() {
+
+    this.serviceMeeting.attendance(this.meeting.id).subscribe({
+      next: (response) => {
+        const workbook = new Workbook();
+        const worksheet = workbook.addWorksheet('Asistencia');
+
+        worksheet.mergeCells('A1:E1');
+
+        const cellA1 = worksheet.getCell('A1');
+        cellA1.value = `Lista de asistencia ${response.data.meeting.name}`;
+        cellA1.alignment = { vertical: 'middle', horizontal: 'center' };
+        cellA1.font = { bold: true, size: 26, color: { argb: 'FF2003AF' } };
+
+        const cellB3 = worksheet.getCell('B3');
+        cellB3.value = `Fecha del evento`;
+        cellB3.alignment = { vertical: 'middle', horizontal: 'center' };
+        cellB3.font = { bold: true, size: 14, }
+
+        const cellC3 = worksheet.getCell('C3');
+        cellC3.value = `Hora de entrada`;
+        cellC3.alignment = { vertical: 'middle', horizontal: 'center' };
+        cellC3.font = { bold: true, size: 14, }
+
+        const cellD3 = worksheet.getCell('D3');
+        cellD3.value = `Hora de salida`;
+        cellD3.alignment = { vertical: 'middle', horizontal: 'center' };
+        cellD3.font = { bold: true, size: 14, }
+
+        const cellB4 = worksheet.getCell('B4');
+        cellB4.value = `${response.data.meeting.date_meeting}`;
+        cellB4.alignment = { vertical: 'middle', horizontal: 'center' };
+        cellB4.font = { size: 14, }
+
+
+        const cellC4 = worksheet.getCell('C4');
+        cellC4.value = `${response.data.meeting.start_hour.slice(0, 5)}`;
+        cellC4.alignment = { vertical: 'middle', horizontal: 'center' };
+        cellC4.font = { size: 14, }
+
+
+        const cellD4 = worksheet.getCell('D4');
+        cellD4.value = `${response.data.meeting.end_hour.slice(0, 5)}`;
+        cellD4.alignment = { vertical: 'middle', horizontal: 'center' };
+        cellD4.font = { size: 14, }
+
+
+
+        worksheet.getColumn(1).width = 25;
+        worksheet.getColumn(2).width = 25;
+        worksheet.getColumn(3).width = 20;
+        worksheet.getColumn(4).width = 20;
+        worksheet.getColumn(5).width = 25;
+
+
+        const rows: Array<any> = [];
+        response.data.attendance.forEach(item => {
+          if (item.check_in != 'Sin registrar') {
+            item.check_in = item.check_in.split(' ')[1].slice(0, 5)
+
+          }
+          if (item.check_out != 'Sin registrar') {
+            item.check_out = item.check_out.split(' ')[1].slice(0, 5)
+          }
+
+          rows.push(Object.values(item))
+        })
+
+
+
+        const table = worksheet.addTable({
+          name: 'AttendanceTable',
+          ref: 'A7',
+          headerRow: true,
+          style: {
+            // theme: 'TableStyleLight4',
+            showRowStripes: true,
+          },
+          columns: [
+            { name: 'Apellidos', filterButton: true },
+            { name: 'Nombre', filterButton: true },
+            { name: 'Hora de entrada', filterButton: true },
+            { name: 'Hora de salida', filterButton: true },
+            { name: 'Estado de la asistencia', filterButton: true },
+          ],
+          rows: rows,
+        })
+
+        worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
+          const item = response.data.attendance[rowNumber - 8]; 
+          if (item && item.status === this.checkUserStatus.Completed) {
+            // row.eachCell((cell, colNumber) => {
+            //   cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '00FF00' } };
+            // });
+            const cellE = row.getCell(5); 
+            cellE.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '66FF66' } };
+          }
+
+          if (item && item.status === this.checkUserStatus.OnlyStart) {
+            const cellE = row.getCell(5); 
+            cellE.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF66' } }; // Amarillo
+          }
+
+          if (item && item.status === this.checkUserStatus.Canceled) {
+            const cellE = row.getCell(5); 
+            cellE.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF6666' } };
+          }
+
+          if (item && item.status === this.checkUserStatus.WithOut) {
+            const cellE = row.getCell(5); 
+            cellE.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'dddddd' } };
+          }
+
+
+        });
+
+
+        workbook.xlsx.writeBuffer().then((buffer: any) => {
+          const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, `Asistencia_${response.data.meeting.name}.xlsx`);
+        });
+      }
+    })
+
   }
 
 }

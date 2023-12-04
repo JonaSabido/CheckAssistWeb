@@ -15,7 +15,7 @@ export interface Meeting extends Model {
     selectedLocation?: boolean,
 }
 
-interface Attendance {
+export interface Attendance {
     last_name: string,
     name: string,
     check_in: string,
